@@ -1356,32 +1356,192 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.35);
 }
 
-/* ===== レスポンシブ ===== */
+/* ===== レスポンシブ・モバイル最適化 ===== */
+
+/* --- タッチデバイス共通設定 --- */
+* { -webkit-tap-highlight-color: rgba(11,92,173,0.08); }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* --- タブレット（〜900px） --- */
 @media (max-width: 900px) {
+  /* ナビゲーション切り替え */
   .nav__links,
   .header-tel,
   .btn-contact-header { display: none; }
   .hamburger { display: flex; }
   .mobile-tel-bar { display: block; }
+
+  /* 全体 */
+  body { padding-bottom: 68px; }
   .section { padding: 64px 20px; }
+
+  /* ヒーロー */
   .hero__content { padding: 0 24px; }
-  .hero__stats { display: none; }
-  .hero__truck { width: 90%; opacity: 0.08; }
+  .hero__truck { width: 80%; opacity: 0.08; bottom: 70px; }
+
+  /* 統計バー：横スクロール表示（非表示→表示に変更） */
+  .hero__stats {
+    display: flex !important;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .hero__stats::-webkit-scrollbar { display: none; }
+  .stat__item { padding: 14px 28px; flex-shrink: 0; }
+  .stat__num { font-size: 26px; }
+  .stat__label { font-size: 10px; }
+
+  /* グリッド→1カラム */
   .strengths__layout,
   .company__layout,
   .contact__layout { grid-template-columns: 1fr; gap: 40px; }
   .footer__top { grid-template-columns: 1fr; gap: 32px; }
   .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
-  body { padding-bottom: 68px; }
 }
 
+/* --- スマートフォン（〜600px） --- */
 @media (max-width: 600px) {
-  .hero { min-height: 100svh; }
-  .hero__ctas { flex-direction: column; }
-  .hero__ctas .btn { width: 100%; justify-content: center; }
-  .safety__cards { grid-template-columns: 1fr; }
-  .cta__buttons { flex-direction: column; align-items: center; }
-  .btn-tel-large, .btn-mail { width: 100%; justify-content: center; }
-  .contact-form { padding: 28px 20px; }
+
+  /* ヘッダーロゴ */
+  .logo__en { font-size: 9px; letter-spacing: 0.1em; }
+  .logo__jp { font-size: 15px; }
+
+  /* ヒーロー */
+  .hero { min-height: 100svh; padding-bottom: 0; }
+  .hero__bg::before { opacity: 0.3; } /* グリッドを薄めてパフォーマンス改善 */
+  .hero__content { padding: 0 20px; }
+  .hero__badges { flex-wrap: wrap; gap: 8px; }
+  .hero__badge { font-size: 11px; padding: 5px 12px; }
+  .hero__headline { font-size: clamp(22px, 6.5vw, 32px); letter-spacing: 0.02em; }
+  .hero__sub { font-size: 13px; line-height: 1.85; max-width: 100%; }
+  .hero__ctas { flex-direction: column; gap: 12px; }
+  .hero__ctas .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 52px; /* タッチターゲット確保 */
+  }
+
+  /* 統計バー（スマホ縮小版） */
+  .stat__item { padding: 12px 18px; }
+  .stat__num { font-size: 22px; }
+  .stat__label { font-size: 9px; white-space: nowrap; }
+  .stat__divider { margin: 8px 0; }
+
+  /* トラストストリップ：横スクロール */
+  .trust-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .trust-strip::-webkit-scrollbar { display: none; }
+  .trust-strip__inner { flex-wrap: nowrap; justify-content: flex-start; }
+  .trust-item { padding: 14px 16px; font-size: 12px; flex-shrink: 0; }
+
+  /* セクション */
+  .section { padding: 52px 16px; }
+  .section__title { font-size: clamp(20px, 5.5vw, 28px); }
+  .section__desc { font-size: 14px; }
+
+  /* 事業内容カード */
+  .services__grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .service-card { padding: 26px 20px; }
+  .service-card__name { font-size: 16px; }
+  .service-card__desc { font-size: 13px; }
+
+  /* 当社の強み */
+  .strengths__visual-card { padding: 28px 20px; }
+  .strengths__badge { width: 76px; height: 76px; top: -14px; right: -14px; }
+  .strengths__badge-num { font-size: 24px; }
+  .strengths__quote { font-size: 16px; }
+  .strengths__quote::before { font-size: 60px; }
+  .strength-item { padding: 16px; gap: 14px; }
+  .strength-item__num { font-size: 24px; }
+  .strength-item__name { font-size: 14px; }
+  .strength-item__desc { font-size: 12px; }
+
+  /* 安全への取り組み：2列グリッド */
+  .safety__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .safety-card { padding: 20px 14px; }
+  .safety-card__icon { font-size: 26px; margin-bottom: 8px; }
+  .safety-card__name { font-size: 13px; margin-bottom: 6px; }
+  .safety-card__desc { font-size: 11px; line-height: 1.65; }
+
+  /* 会社概要テーブル */
+  .company-table th {
+    width: 35%;
+    font-size: 12px;
+    padding: 10px 12px;
+    white-space: normal; /* 折り返し許可 */
+  }
+  .company-table td { font-size: 13px; padding: 10px 12px; }
+  .branch-card { padding: 20px 18px; }
+  .link--tel { font-size: 20px; }
+
+  /* Googleマップ */
+  .map-embed { height: 180px; }
+
+  /* CTAバナー */
+  .cta-section { padding: 52px 16px; }
+  .cta__desc { font-size: 13px; }
+  .cta__buttons { flex-direction: column; align-items: stretch; gap: 12px; }
+  .btn-tel-large {
+    width: 100%;
+    justify-content: center;
+    min-height: 60px; /* 電話ボタンは特に大きく */
+    font-size: 24px;
+    padding: 16px 20px;
+  }
+  .btn-mail {
+    width: 100%;
+    justify-content: center;
+    min-height: 52px;
+    font-size: 15px;
+    padding: 14px 20px;
+  }
+
+  /* お問い合わせフォーム */
+  .contact-form { padding: 22px 16px; border-radius: 12px; }
   .form-row { grid-template-columns: 1fr; }
+
+  /* ★ iOS ズーム防止：16px未満だと自動ズームが発生する */
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 16px !important;
+    padding: 14px 12px;
+  }
+
+  /* タッチターゲット最低高さ */
+  .btn-submit {
+    min-height: 52px;
+    padding: 16px;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+  .nav-drawer__links a { min-height: 52px; }
+
+  /* フッター */
+  .site-footer { padding: 44px 16px 80px; }
+  .footer__nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 0;
+  }
+  .footer__nav-links a { padding: 7px 0; font-size: 13px; }
+  .footer__contact-item { font-size: 12px; line-height: 1.9; }
+  .footer__brand .logo__jp { font-size: 16px; }
+}
+
+/* --- 超小型端末（〜375px：iPhone SE等） --- */
+@media (max-width: 375px) {
+  .hero__headline { font-size: 20px; }
+  .hero__badges { flex-direction: column; gap: 6px; align-items: flex-start; }
+  .safety__cards { grid-template-columns: 1fr; }
+  .stat__item { padding: 10px 14px; }
+  .stat__num { font-size: 20px; }
 }
