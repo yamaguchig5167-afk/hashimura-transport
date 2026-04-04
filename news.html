@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<title>お知らせ｜有限会社橋村運送</title>
+<meta name="description" content="有限会社橋村運送からのお知らせ・最新情報です。電柱輸送・電力インフラ資材輸送の専門運送会社からの更新情報をご確認ください。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hashimura-transport.com/news.html">
+
+<!-- OGP -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://hashimura-transport.com/news.html">
+<meta property="og:title"       content="お知らせ｜有限会社橋村運送">
+<meta property="og:description" content="有限会社橋村運送からのお知らせ・最新情報。">
+<meta property="og:image"       content="https://hashimura-transport.com/images/ogp.jpg">
+<meta property="og:locale"      content="ja_JP">
+<meta property="og:site_name"   content="有限会社橋村運送">
+
+<!-- フォント -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- スタイルシート -->
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* ===== news.html 固有スタイル ===== */
+
+/* ページヒーロー */
+.page-hero {
+  background: linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue-dark) 50%, var(--blue-primary) 100%);
+  padding: calc(var(--header-height) + 64px) 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+.page-hero__label {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+}
+.page-hero__title {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+.page-hero__desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* パンくずリスト */
+.breadcrumb {
+  background: var(--bg-light);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+.breadcrumb__list {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--slate-mid);
+}
+.breadcrumb__list li + li::before {
+  content: '›';
+  margin-right: 8px;
+}
+.breadcrumb__list a {
+  color: var(--blue-primary);
+}
+.breadcrumb__list a:hover { text-decoration: underline; }
+
+/* レイアウト */
+.news-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* カテゴリバッジ */
+.news-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.news-badge--info     { background: var(--blue-light); color: var(--blue-primary); }
+.news-badge--recruit  { background: #FFF3CD; color: #856404; }
+.news-badge--notice   { background: #F8D7DA; color: #721C24; }
+.news-badge--update   { background: #D1ECF1; color: #0C5460; }
+
+/* ニュースリスト */
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.news-item {
+  display: grid;
+  grid-template-columns: 110px 80px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-light);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+.news-item:first-child {
+  border-top: 1px solid var(--border-light);
+}
+.news-item:hover {
+  background: var(--bg-light);
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+  border-radius: 8px;
+  border-color: transparent;
+}
+.news-item:hover .news-item__title {
+  color: var(--blue-primary);
+}
+.news-item__date {
+  font-family: var(--font-en);
+  font-size: 13px;
+  color: var(--slate-mid);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.news-item__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-body);
+  line-height: 1.55;
+  transition: color var(--transition);
+}
+
+/* 空のステート */
+.news-empty {
+  text-align: center;
+  padding: 80px 24px;
+  border: 2px dashed var(--border-light);
+  border-radius: 16px;
+}
+.news-empty__icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+.news-empty__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--slate-dark);
+  margin-bottom: 10px;
+}
+.news-empty__desc {
+  font-size: 14px;
+  color: var(--slate-mid);
+  line-height: 1.75;
+}
+
+/* サイドバー */
+.news-sidebar {}
+.sidebar-widget {
+  background: var(--bg-light);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+}
+.sidebar-widget__title {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--blue-primary);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-widget__title::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--blue-primary);
+  flex-shrink: 0;
+}
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.category-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--white);
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: default;
+}
+.category-list__count {
+  font-family: var(--font-en);
+  font-size: 12px;
+  color: var(--slate-mid);
+}
+
+/* お問い合わせバナー（サイドバー） */
+.sidebar-contact {
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.sidebar-contact__title {
+  font-family: var(--font-jp-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.sidebar-contact__desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.sidebar-contact__tel {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+.sidebar-contact__btn {
+  display: block;
+  background: var(--accent-gold);
+  color: var(--slate-dark);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  transition: var(--transition);
+}
+.sidebar-contact__btn:hover {
+  background: #E8C76A;
+}
+
+/* レスポンシブ */
+@media (max-width: 900px) {
+  .news-layout {
+    grid-template-columns: 1fr;
+  }
+  .news-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .news-sidebar > *:last-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .news-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .news-item__date {
+    font-size: 12px;
+  }
+  .news-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ヘッダー（共通） ===== -->
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo" aria-label="有限会社橋村運送 トップへ">
+      <span class="logo__en">Hashimura Transport Co., Ltd.</span>
+      <span class="logo__jp"><span>有限会社</span>橋村運送</span>
+    </a>
+    <nav class="header-nav" aria-label="メインナビゲーション">
+      <ul class="nav__links">
+        <li><a href="services.html">事業内容</a></li>
+        <li><a href="index.html#strengths">当社の強み</a></li>
+        <li><a href="index.html#safety">安全への取り組み</a></li>
+        <li><a href="index.html#company">会社概要</a></li>
+        <li><a href="recruit.html">採用情報</a></li>
+        <li><a href="news.html" aria-current="page">お知らせ</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+      </ul>
+      <div class="header-tel">
+        <small>お電話でのお問い合わせ</small>
+        <a href="tel:0963550361" aria-label="電話番号 096-355-0361">096-355-0361</a>
+      </div>
+      <a href="index.html#contact" class="btn-contact-header">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </div>
+</header>
+
+<!-- モバイルドロワー -->
+<nav class="nav-drawer" aria-label="モバイルメニュー">
+  <ul class="nav-drawer__links">
+    <li><a href="services.html">事業内容</a></li>
+    <li><a href="index.html#strengths">当社の強み</a></li>
+    <li><a href="index.html#safety">安全への取り組み</a></li>
+    <li><a href="index.html#company">会社概要</a></li>
+    <li><a href="recruit.html">採用情報</a></li>
+    <li><a href="news.html">お知らせ</a></li>
+    <li><a href="index.html#contact">お問い合わせ</a></li>
+  </ul>
+  <div class="nav-drawer__tel">
+    <a href="tel:0963550361">📞 096-355-0361</a>
+  </div>
+</nav>
+
+<!-- モバイル固定電話バー -->
+<div class="mobile-tel-bar" role="complementary" aria-label="電話でのお問い合わせ">
+  <a href="tel:0963550361" aria-label="本社に電話する 096-355-0361">
+    📞 096-355-0361（本社）
+  </a>
+</div>
+
+<!-- ===== ページヒーロー ===== -->
+<div class="page-hero">
+  <span class="page-hero__label">News</span>
+  <h1 class="page-hero__title">お知らせ</h1>
+  <p class="page-hero__desc">
+    有限会社橋村運送からの最新情報をお届けします。
+  </p>
+</div>
+
+<!-- パンくずリスト -->
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol class="breadcrumb__list">
+    <li><a href="index.html">ホーム</a></li>
+    <li aria-current="page">お知らせ</li>
+  </ol>
+</nav>
+
+<!-- ===== お知らせ一覧 ===== -->
+<section class="section" aria-labelledby="news-title">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section__label">Latest News</p>
+      <h2 id="news-title" class="section__title">最新のお知らせ</h2>
+    </div>
+
+    <div class="news-layout">
+      <!-- ニュース本体 -->
+      <main>
+        <!-- ニュースが増えたらここに <a class="news-item"> を追加する -->
+        <!--
+        使用例:
+        <a href="#" class="news-item">
+          <time class="news-item__date" datetime="2025-04-01">2025.04.01</time>
+          <span class="news-badge news-badge--info">お知らせ</span>
+          <p class="news-item__title">タイトルをここに記入します</p>
+        </a>
+        カテゴリ:
+          news-badge--info    : お知らせ（青）
+          news-badge--recruit : 採用情報（黄）
+          news-badge--notice  : 重要（赤）
+          news-badge--update  : 更新情報（水色）
+        -->
+
+        <div class="news-list fade-in" id="news-list" aria-label="お知らせ一覧">
+          <!-- サンプル記事（公開前に削除または差し替えてください） -->
+          <a href="#" class="news-item">
+            <time class="news-item__date" datetime="2025-04-01">2025.04.01</time>
+            <span class="news-badge news-badge--update">更新情報</span>
+            <p class="news-item__title">公式ホームページを開設しました</p>
+          </a>
+          <a href="recruit.html" class="news-item">
+            <time class="news-item__date" datetime="2025-04-01">2025.04.01</time>
+            <span class="news-badge news-badge--recruit">採用情報</span>
+            <p class="news-item__title">ドライバー（大型・中型）の募集を開始しました。お気軽にご応募ください。</p>
+          </a>
+        </div>
+
+        <!-- 記事が0件のときの表示（上のリストが空の場合はこちらを表示） -->
+        <!--
+        <div class="news-empty fade-in">
+          <span class="news-empty__icon" aria-hidden="true">📭</span>
+          <p class="news-empty__title">現在お知らせはありません</p>
+          <p class="news-empty__desc">
+            新しいお知らせがあればこちらに掲載いたします。<br>
+            しばらくお待ちください。
+          </p>
+        </div>
+        -->
+      </main>
+
+      <!-- サイドバー -->
+      <aside class="news-sidebar fade-in">
+        <!-- カテゴリ -->
+        <div class="sidebar-widget">
+          <p class="sidebar-widget__title">Category</p>
+          <ul class="category-list">
+            <li class="category-list__item">
+              <span>お知らせ</span>
+              <span class="category-list__count">—</span>
+            </li>
+            <li class="category-list__item">
+              <span>採用情報</span>
+              <span class="category-list__count">1</span>
+            </li>
+            <li class="category-list__item">
+              <span>重要なお知らせ</span>
+              <span class="category-list__count">—</span>
+            </li>
+            <li class="category-list__item">
+              <span>更新情報</span>
+              <span class="category-list__count">1</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- お問い合わせバナー -->
+        <div class="sidebar-contact">
+          <p class="sidebar-contact__title">輸送のご相談はお気軽に</p>
+          <p class="sidebar-contact__desc">
+            電柱輸送・インフラ資材輸送のご依頼・お見積りはお電話またはメールにて。
+          </p>
+          <a href="tel:0963550361" class="sidebar-contact__tel" aria-label="電話番号 096-355-0361">
+            096-355-0361
+          </a>
+          <a href="index.html#contact" class="sidebar-contact__btn">
+            メールでのお問い合わせ
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== フッター（共通） ===== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo__en">Hashimura Transport Co., Ltd.</div>
+        <div class="logo__jp"><span>有限会社</span>橋村運送</div>
+        <p class="footer__tagline">
+          九州の電力インフラを足元から支える、<br>現場力のある輸送会社。
+        </p>
+      </div>
+      <div>
+        <p class="footer__nav-title">Navigation</p>
+        <ul class="footer__nav-links">
+          <li><a href="services.html">事業内容</a></li>
+          <li><a href="index.html#strengths">当社の強み</a></li>
+          <li><a href="index.html#safety">安全への取り組み</a></li>
+          <li><a href="index.html#company">会社概要</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__nav-title">Contact</p>
+        <div class="footer__contact-item">
+          <span class="footer__contact-label">本社</span>
+          〒860-0047 熊本県熊本市西区春日7-13-7<br>
+          TEL：<a href="tel:0963550361">096-355-0361</a>　FAX：096-355-0363
+          <span class="footer__contact-label">大津営業所</span>
+          〒869-1236 熊本県菊池郡大津町杉水3533<br>
+          TEL：<a href="tel:0962845007">096-284-5007</a>　FAX：096-284-5008
+          <span class="footer__contact-label">メール</span>
+          <a href="mailto:hashimura@dolphin.ocn.ne.jp">hashimura@dolphin.ocn.ne.jp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 有限会社橋村運送 All Rights Reserved.</p>
+      <p>制作：YOHAKU Lab.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

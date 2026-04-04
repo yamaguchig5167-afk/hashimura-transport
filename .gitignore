@@ -1,0 +1,15 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+*.swp
+*.swo
+
+# Node modules (もしあれば)
+node_modules/
+
+# 環境変数・機密ファイル
+.env
+*.env.local

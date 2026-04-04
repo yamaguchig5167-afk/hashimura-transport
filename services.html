@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<title>事業内容｜有限会社橋村運送 熊本の電力インフラ資材輸送</title>
+<meta name="description" content="有限会社橋村運送の事業内容。電柱輸送・電力インフラ資材輸送・現場直送など、九州電力関連資材の輸送を専門に行っています。平ボディ車・ユニック車20台体制。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hashimura-transport.com/services.html">
+
+<!-- OGP -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://hashimura-transport.com/services.html">
+<meta property="og:title"       content="事業内容｜有限会社橋村運送">
+<meta property="og:description" content="電柱輸送・電力インフラ資材輸送・現場直送など、九州電力関連資材の輸送を専門に行っています。">
+<meta property="og:image"       content="https://hashimura-transport.com/images/ogp.jpg">
+<meta property="og:locale"      content="ja_JP">
+<meta property="og:site_name"   content="有限会社橋村運送">
+
+<!-- フォント -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- スタイルシート -->
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* ===== services.html 固有スタイル ===== */
+
+/* ページヒーロー */
+.page-hero {
+  background: linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue-dark) 50%, var(--blue-primary) 100%);
+  padding: calc(var(--header-height) + 64px) 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+.page-hero__label {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+}
+.page-hero__title {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+.page-hero__desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* パンくずリスト */
+.breadcrumb {
+  background: var(--bg-light);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+.breadcrumb__list {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--slate-mid);
+}
+.breadcrumb__list li + li::before {
+  content: '›';
+  margin-right: 8px;
+}
+.breadcrumb__list a {
+  color: var(--blue-primary);
+  text-decoration: none;
+}
+.breadcrumb__list a:hover { text-decoration: underline; }
+
+/* サービス詳細カード */
+.service-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 80px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--border-light);
+}
+.service-detail:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+/* 奇数番目は逆順 */
+.service-detail:nth-child(even) { direction: rtl; }
+.service-detail:nth-child(even) > * { direction: ltr; }
+
+.service-detail__visual {
+  background: linear-gradient(135deg, var(--blue-light) 0%, #d8ecf9 100%);
+  border-radius: 16px;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.service-detail__visual::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: var(--blue-primary);
+  opacity: 0.08;
+  border-radius: 50%;
+}
+.service-detail__icon-wrap {
+  width: 80px;
+  height: 80px;
+  background: var(--white);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+.service-detail__icon-wrap svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--blue-primary);
+  fill: none;
+}
+.service-detail__body {}
+.service-detail__num {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue-primary);
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.service-detail__num::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
+  max-width: 40px;
+}
+.service-detail__name {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--slate-dark);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.service-detail__desc {
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.service-detail__points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.service-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+.service-point::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* 車両情報セクション */
+.vehicles__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.vehicle-card {
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.vehicle-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--blue-primary);
+}
+.vehicle-card__icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+}
+.vehicle-card__name {
+  font-family: var(--font-jp-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--slate-dark);
+  margin-bottom: 10px;
+}
+.vehicle-card__desc {
+  font-size: 13px;
+  color: var(--slate-mid);
+  line-height: 1.75;
+}
+
+/* 対応エリア */
+.area-section {
+  background: linear-gradient(135deg, var(--blue-deeper), var(--blue-dark));
+  border-radius: 20px;
+  padding: 56px 48px;
+  text-align: center;
+  margin-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.area-section::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+.area-section__title {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.area-section__desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.85;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+.area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.area-tag {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.area-tag--primary {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--slate-dark);
+  font-weight: 700;
+}
+
+/* CTA */
+.services-cta {
+  background: var(--bg-light);
+  border-radius: 20px;
+  padding: 56px 48px;
+  text-align: center;
+  margin-top: 64px;
+}
+.services-cta__title {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--slate-dark);
+  margin-bottom: 12px;
+}
+.services-cta__desc {
+  font-size: 15px;
+  color: var(--slate-mid);
+  line-height: 1.85;
+  margin-bottom: 32px;
+}
+.services-cta__btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* レスポンシブ */
+@media (max-width: 900px) {
+  .service-detail {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .service-detail:nth-child(even) { direction: ltr; }
+  .area-section { padding: 40px 28px; }
+  .services-cta { padding: 40px 28px; }
+}
+@media (max-width: 600px) {
+  .vehicles__grid { grid-template-columns: 1fr 1fr; }
+  .services-cta__btns { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ヘッダー（共通） ===== -->
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo" aria-label="有限会社橋村運送 トップへ">
+      <span class="logo__en">Hashimura Transport Co., Ltd.</span>
+      <span class="logo__jp"><span>有限会社</span>橋村運送</span>
+    </a>
+    <nav class="header-nav" aria-label="メインナビゲーション">
+      <ul class="nav__links">
+        <li><a href="services.html" aria-current="page">事業内容</a></li>
+        <li><a href="index.html#strengths">当社の強み</a></li>
+        <li><a href="index.html#safety">安全への取り組み</a></li>
+        <li><a href="index.html#company">会社概要</a></li>
+        <li><a href="recruit.html">採用情報</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+      </ul>
+      <div class="header-tel">
+        <small>お電話でのお問い合わせ</small>
+        <a href="tel:0963550361" aria-label="電話番号 096-355-0361">096-355-0361</a>
+      </div>
+      <a href="index.html#contact" class="btn-contact-header">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </div>
+</header>
+
+<!-- モバイルドロワー -->
+<nav class="nav-drawer" aria-label="モバイルメニュー">
+  <ul class="nav-drawer__links">
+    <li><a href="services.html">事業内容</a></li>
+    <li><a href="index.html#strengths">当社の強み</a></li>
+    <li><a href="index.html#safety">安全への取り組み</a></li>
+    <li><a href="index.html#company">会社概要</a></li>
+    <li><a href="recruit.html">採用情報</a></li>
+    <li><a href="index.html#contact">お問い合わせ</a></li>
+  </ul>
+  <div class="nav-drawer__tel">
+    <a href="tel:0963550361">📞 096-355-0361</a>
+  </div>
+</nav>
+
+<!-- モバイル固定電話バー -->
+<div class="mobile-tel-bar" role="complementary" aria-label="電話でのお問い合わせ">
+  <a href="tel:0963550361" aria-label="本社に電話する 096-355-0361">
+    📞 096-355-0361（本社）
+  </a>
+</div>
+
+<!-- ===== ページヒーロー ===== -->
+<div class="page-hero">
+  <span class="page-hero__label">Services</span>
+  <h1 class="page-hero__title">事業内容</h1>
+  <p class="page-hero__desc">
+    電柱輸送をはじめとする電力インフラ資材の輸送を専門に、<br>
+    九州の社会基盤を足元から支えています。
+  </p>
+</div>
+
+<!-- パンくずリスト -->
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol class="breadcrumb__list">
+    <li><a href="index.html">ホーム</a></li>
+    <li aria-current="page">事業内容</li>
+  </ol>
+</nav>
+
+<!-- ===== サービス詳細 ===== -->
+<section class="section" aria-labelledby="services-title">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section__label">Our Services</p>
+      <h2 id="services-title" class="section__title">専門に培ってきた、<br>4つの輸送サービス</h2>
+      <p class="section__desc">
+        20年以上にわたり電力インフラ資材輸送を専門としてきた経験と技術。現場が求める安全・確実・迅速な輸送を実現します。
+      </p>
+    </div>
+
+    <!-- 01 電柱輸送 -->
+    <div class="service-detail fade-in">
+      <div class="service-detail__visual">
+        <div class="service-detail__icon-wrap">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+            <rect x="11" y="2" width="2" height="20"/>
+            <line x1="6" y1="7" x2="18" y2="7"/>
+            <line x1="8" y1="11" x2="16" y2="11"/>
+            <circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p class="service-detail__num">SERVICE 01</p>
+        <h3 class="service-detail__name">電柱輸送</h3>
+        <p class="service-detail__desc">
+          コンクリート電柱・鋼管電柱など、電力・通信インフラに不可欠な電柱の輸送を専門に行います。長さ10m以上に及ぶ長尺物の取り扱いに精通したドライバーと専用の平ボディ車で、安全確実に現場まで届けます。
+        </p>
+        <ul class="service-detail__points">
+          <li class="service-point">コンクリート電柱・鋼管電柱・FRP電柱など各種に対応</li>
+          <li class="service-point">長尺物輸送の専門資格・経験を持つドライバーが対応</li>
+          <li class="service-point">固縛・養生を確実に行い、破損ゼロを徹底</li>
+          <li class="service-point">工事現場のスケジュールに合わせたタイムリー配送</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 02 電力インフラ資材輸送 -->
+    <div class="service-detail fade-in">
+      <div class="service-detail__visual">
+        <div class="service-detail__icon-wrap">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p class="service-detail__num">SERVICE 02</p>
+        <h3 class="service-detail__name">電力インフラ資材輸送</h3>
+        <p class="service-detail__desc">
+          九州電力関連の変圧器・配電盤・各種ケーブルドラム・鉄塔部材など、多様な電力資材の輸送に対応します。精密機器から大型重量物まで、資材の特性に合わせた最適な輸送計画を立案・実行します。
+        </p>
+        <ul class="service-detail__points">
+          <li class="service-point">変圧器・配電盤・ケーブルドラムなど精密資材に対応</li>
+          <li class="service-point">重量物・大型資材の取り扱いノウハウを蓄積</li>
+          <li class="service-point">鉄塔部材など特殊形状の資材にも柔軟に対応</li>
+          <li class="service-point">ユニック車によるクレーン積み降ろしサービス</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 03 現場直送・タイムリー配送 -->
+    <div class="service-detail fade-in">
+      <div class="service-detail__visual">
+        <div class="service-detail__icon-wrap">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p class="service-detail__num">SERVICE 03</p>
+        <h3 class="service-detail__name">現場直送・タイムリー配送</h3>
+        <p class="service-detail__desc">
+          工事現場のスケジュールに合わせたジャストインタイム配送を実施します。現場の段取りを深く理解したドライバーが、資材が必要な瞬間に届ける配送計画で、施工効率の向上に貢献します。
+        </p>
+        <ul class="service-detail__points">
+          <li class="service-point">現場の工程に合わせた配送スケジュール管理</li>
+          <li class="service-point">熊本・大津の2拠点体制で県内全域に迅速対応</li>
+          <li class="service-point">変更・調整にも柔軟に対応できる運行管理体制</li>
+          <li class="service-point">到着連絡・報告を確実に行うコミュニケーション</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 04 各種インフラ関連資材輸送 -->
+    <div class="service-detail fade-in">
+      <div class="service-detail__visual">
+        <div class="service-detail__icon-wrap">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p class="service-detail__num">SERVICE 04</p>
+        <h3 class="service-detail__name">各種インフラ関連資材輸送</h3>
+        <p class="service-detail__desc">
+          電力インフラにとどまらず、通信・土木・建設関連の資材輸送も幅広く対応します。ユニック車・平ボディ車を活用し、山間部・狭隘路などの難条件にも対応できる現場力を発揮します。
+        </p>
+        <ul class="service-detail__points">
+          <li class="service-point">通信設備・土木建設資材など幅広い資材に対応</li>
+          <li class="service-point">山間部・離島・狭隘路など難条件の現場も対応可</li>
+          <li class="service-point">平ボディ車・ユニック車を現場条件に合わせて選択</li>
+          <li class="service-point">協力会社としての長期継続契約も歓迎</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 保有車両 ===== -->
+<section class="section section--light" aria-labelledby="vehicles-title">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section__label">Our Fleet</p>
+      <h2 id="vehicles-title" class="section__title">保有車両</h2>
+      <p class="section__desc">
+        あらゆる輸送ニーズに対応するため、20台の多彩な車両を保有・管理しています。
+      </p>
+    </div>
+    <div class="vehicles__grid">
+      <article class="vehicle-card fade-in fade-in--delay-1">
+        <span class="vehicle-card__icon" aria-hidden="true">🚛</span>
+        <h3 class="vehicle-card__name">平ボディ車（大型）</h3>
+        <p class="vehicle-card__desc">電柱・長尺資材の輸送に最適。広い荷台で大型資材も安全に積載できます。</p>
+      </article>
+      <article class="vehicle-card fade-in fade-in--delay-2">
+        <span class="vehicle-card__icon" aria-hidden="true">🏗️</span>
+        <h3 class="vehicle-card__name">ユニック車（クレーン付）</h3>
+        <p class="vehicle-card__desc">クレーン機能付きで、重量物の積み降ろしを現場で自在に行えます。</p>
+      </article>
+      <article class="vehicle-card fade-in fade-in--delay-1">
+        <span class="vehicle-card__icon" aria-hidden="true">🚚</span>
+        <h3 class="vehicle-card__name">平ボディ車（中型）</h3>
+        <p class="vehicle-card__desc">中型資材の輸送に対応。狭隘路や住宅街など限られたスペースでも活躍。</p>
+      </article>
+      <article class="vehicle-card fade-in fade-in--delay-2">
+        <span class="vehicle-card__icon" aria-hidden="true">📊</span>
+        <h3 class="vehicle-card__name">合計 20台体制</h3>
+        <p class="vehicle-card__desc">車両の種類・サイズを豊富に取り揃え、あらゆる輸送ニーズに対応可能です。</p>
+      </article>
+    </div>
+
+    <!-- 対応エリア -->
+    <div class="area-section fade-in">
+      <h2 class="area-section__title">輸送対応エリア</h2>
+      <p class="area-section__desc">
+        熊本市西区（本社）と菊池郡大津町（大津営業所）の2拠点体制で、熊本県内を中心に九州全域の輸送に対応しています。
+      </p>
+      <div class="area-tags">
+        <span class="area-tag area-tag--primary">熊本県（主対応）</span>
+        <span class="area-tag">福岡県</span>
+        <span class="area-tag">佐賀県</span>
+        <span class="area-tag">長崎県</span>
+        <span class="area-tag">大分県</span>
+        <span class="area-tag">宮崎県</span>
+        <span class="area-tag">鹿児島県</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.7); font-size:13px;">
+        ※ エリア外のご相談もお気軽にお問い合わせください。
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="services-cta fade-in">
+      <h2 class="services-cta__title">輸送のご依頼・お見積りはお気軽に</h2>
+      <p class="services-cta__desc">
+        電柱輸送・電力インフラ資材輸送についてのご相談、お見積りは無料です。<br>
+        まずはお電話またはメールにてご連絡ください。
+      </p>
+      <div class="services-cta__btns">
+        <a href="tel:0963550361" class="btn btn--blue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.87 2 2 0 0 1 3.59 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5z"/></svg>
+          096-355-0361（本社）
+        </a>
+        <a href="index.html#contact" class="btn btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          メールでのお問い合わせ
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== フッター（共通） ===== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo__en">Hashimura Transport Co., Ltd.</div>
+        <div class="logo__jp"><span>有限会社</span>橋村運送</div>
+        <p class="footer__tagline">
+          九州の電力インフラを足元から支える、<br>現場力のある輸送会社。
+        </p>
+      </div>
+      <div>
+        <p class="footer__nav-title">Navigation</p>
+        <ul class="footer__nav-links">
+          <li><a href="services.html">事業内容</a></li>
+          <li><a href="index.html#strengths">当社の強み</a></li>
+          <li><a href="index.html#safety">安全への取り組み</a></li>
+          <li><a href="index.html#company">会社概要</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__nav-title">Contact</p>
+        <div class="footer__contact-item">
+          <span class="footer__contact-label">本社</span>
+          〒860-0047 熊本県熊本市西区春日7-13-7<br>
+          TEL：<a href="tel:0963550361">096-355-0361</a>　FAX：096-355-0363
+          <span class="footer__contact-label">大津営業所</span>
+          〒869-1236 熊本県菊池郡大津町杉水3533<br>
+          TEL：<a href="tel:0962845007">096-284-5007</a>　FAX：096-284-5008
+          <span class="footer__contact-label">メール</span>
+          <a href="mailto:hashimura@dolphin.ocn.ne.jp">hashimura@dolphin.ocn.ne.jp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 有限会社橋村運送 All Rights Reserved.</p>
+      <p>制作：YOHAKU Lab.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
