@@ -1666,27 +1666,51 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
-   フッター ブランドバッジ（HASHIMURA UNSOUロゴ）
+   HASHIMURA UNSOU ブランドロゴ（インラインSVG）
    ============================================================ */
-.footer__brand-badge {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
+
+/* ===== フッター内ロゴ ===== */
+.footer__brand-logo {
+  margin-top: 20px;
 }
-.footer__badge-img {
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
-  object-fit: cover;
-  border: 2px solid rgba(255,255,255,0.15);
-  opacity: 0.9;
-  transition: opacity 0.2s;
+/* SVGロゴ共通スタイル */
+.hu-logo {
+  display: block;
+  color: white; /* currentColor = white → テキスト・歯が白 */
+  overflow: visible;
 }
-.footer__badge-img:hover { opacity: 1; }
-.footer__badge-svg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+/* フッター用サイズ */
+.footer__brand-logo .hu-logo {
+  width: 200px;   /* 表示幅 */
+  height: auto;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+.footer__brand-logo .hu-logo:hover {
+  opacity: 1;
+}
+
+/* ===== ヒーロー内ロゴ ===== */
+.hero__brand-logo {
+  position: absolute;
+  bottom: 92px; /* 統計バーの上 */
+  left: 48px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeInUp 0.6s 0.7s both;
+}
+.hu-logo--hero {
+  width: 160px;
+  height: auto;
+  color: white;
+  opacity: 0.35; /* 控えめなウォーターマーク */
+}
+
+/* モバイルではヒーロー内ロゴを非表示 */
+@media (max-width: 900px) {
+  .hero__brand-logo { display: none; }
+  .footer__brand-logo .hu-logo { width: 170px; }
 }
 
 /* ============================================================
