@@ -450,19 +450,30 @@ ul { list-style: none; }
 .hero__pole--1::before { top: 15%; width: 60px; }
 .hero__pole--1::after  { top: 28%; width: 40px; }
 .hero__pole--2::before { top: 18%; width: 50px; }
-/* トラックSVGシルエット */
+/* トラック写真（ヒーロー右側 / mix-blend-mode:multiplyで白背景を透過） */
 .hero__truck {
   position: absolute;
-  right: -2%;
-  bottom: 80px; /* 統計バー分だけ上にずらす */
-  width: 58%;
-  max-width: 780px;
+  right: -3%;
+  bottom: 78px; /* 統計バー分だけ上にずらす */
+  width: 56%;
+  max-width: 800px;
+  /* 白背景を透過しヒーロー背景と馴染ませる */
+  mix-blend-mode: multiply;
   opacity: 0;
+  /* 右端・上端をグラデーションマスクでフェードアウト */
+  -webkit-mask-image:
+    linear-gradient(to left,  transparent 0%,  black 12%),
+    linear-gradient(to top,   transparent 0%,  black 18%);
+  mask-image:
+    linear-gradient(to left,  transparent 0%,  black 12%),
+    linear-gradient(to top,   transparent 0%,  black 18%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
   animation: slideInTruck 1.4s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
 }
 @keyframes slideInTruck {
-  from { transform: translateX(80px); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 0.16; }
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
 /* コンテンツ */
 .hero__content {
@@ -1377,7 +1388,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
   /* ヒーロー */
   .hero__content { padding: 0 24px; }
-  .hero__truck { width: 80%; opacity: 0.08; bottom: 70px; }
+  .hero__truck { width: 80%; bottom: 70px; }
 
   /* 統計バー：横スクロール表示（非表示→表示に変更） */
   .hero__stats {
@@ -1698,20 +1709,23 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
-   トラックステージ — マルチレイヤーパララックス走行シーン
+   保有車両セクション（クリーン・静的表示）
    ============================================================ */
 
 /* ===== セクション全体 ===== */
-.truck-stage {
+.fleet-section {
   background: var(--white);
-  padding: 72px 0 0;
+  padding: 80px 0 0;
   overflow: hidden;
 }
-.truck-stage__header {
+.fleet-section__header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.truck-stage__title {
+.fleet-section__title {
   font-family: var(--font-jp-serif);
   font-size: clamp(22px, 3.5vw, 32px);
   font-weight: 700;
@@ -1719,279 +1733,76 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   line-height: 1.45;
   margin-top: 8px;
 }
-.truck-stage__title em {
+.fleet-section__title em {
   font-style: normal;
   color: var(--blue-primary);
 }
-
-/* ===== シーンラッパー（300px の舞台） ===== */
-.truck-scene-wrap {
-  position: relative;
-  height: 300px;
-  overflow: hidden;
+.fleet-section__lead {
+  font-size: clamp(13px, 1.5vw, 15px);
+  color: var(--slate-mid);
+  line-height: 1.85;
+  margin-top: 14px;
 }
 
-/* ===== レイヤー1: 空グラデーション ===== */
-.ts-sky {
-  position: absolute;
-  inset: 0;
-  /* 上60%が空、下40%が道路として見えるグラデーション */
+/* ===== トラック写真ステージ ===== */
+.fleet-truck-stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 44px;
+  /* 空→白→薄いグレー地面 のグラデーション */
   background: linear-gradient(
     180deg,
-    #a8d4ef 0%,
-    #bce0f6 30%,
-    #daeef9 57%,
-    #a0a0a0 57%,
-    #787878 75%,
-    #646464 100%
+    #dff0fa 0%,
+    #eef8fd 28%,
+    #ffffff 52%,
+    #f2f2f2 52%,
+    #e4e4e4 100%
   );
-  z-index: 0;
+  /* ブルーラインを底面アクセントに */
+  border-bottom: 5px solid var(--blue-primary);
+  text-align: center;
+  padding: 48px 24px 0;
 }
-
-/* ===== レイヤー2: 流れる雲 ===== */
-.ts-clouds {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  /* 空の部分（57%）にだけ雲を表示 */
-  height: 57%;
-  overflow: hidden;
-  z-index: 1;
-}
-.ts-cloud {
-  position: absolute;
-  border-radius: 50px;
-  background: rgba(255, 255, 255, 0.82);
-  filter: blur(5px);
-  animation: cloudDrift linear infinite;
-}
-.ts-cloud--1 {
-  top: 18%; left: 8%;
-  width: 170px; height: 38px;
-  animation-duration: 30s;
-  opacity: 0.75;
-}
-.ts-cloud--2 {
-  top: 40%; left: 38%;
-  width: 250px; height: 52px;
-  animation-duration: 44s;
-  opacity: 0.60;
-  animation-delay: -14s;
-}
-.ts-cloud--3 {
-  top: 10%; left: 68%;
-  width: 130px; height: 30px;
-  animation-duration: 36s;
-  opacity: 0.68;
-  animation-delay: -24s;
-}
-@keyframes cloudDrift {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-200vw); }
-}
-
-/* ===== レイヤー3: 山シルエット（低速パララックス） ===== */
-.ts-mountains {
-  position: absolute;
-  /* 道路上端（下から43%）に底を合わせる */
-  bottom: 43%;
-  left: 0;
-  /* 2枚のSVGを横に並べてシームレスループ */
-  width: 200%;
-  height: 90px;
-  display: flex;
-  z-index: 2;
-  /* 雲より遅く（視差）、道路より手前 */
-  animation: mountainScroll 22s linear infinite;
-}
-.ts-mountain-svg {
-  width: 50%;
-  height: 100%;
-  flex-shrink: 0;
-}
-@keyframes mountainScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ===== レイヤー4: 電柱（中速パララックス） ===== */
-.ts-poles {
-  position: absolute;
-  /* 道路上端より少し上 */
-  bottom: 40%;
-  left: 0; right: 0;
-  height: 70px;
-  z-index: 3;
-  /* 電柱SVGをdata-URIで繰り返し */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='70'%3E%3Crect x='83' y='0' width='14' height='70' rx='3' fill='%234a5a6a' opacity='0.65'/%3E%3Crect x='38' y='14' width='104' height='8' rx='3' fill='%235a6a7a' opacity='0.55'/%3E%3Ccircle cx='38' cy='18' r='6' fill='%236a7a8a' opacity='0.45'/%3E%3Ccircle cx='142' cy='18' r='6' fill='%236a7a8a' opacity='0.45'/%3E%3Cline x1='83' y1='0' x2='38' y2='18' stroke='%234a5a6a' stroke-width='1.5' opacity='0.4'/%3E%3Cline x1='97' y1='0' x2='142' y2='18' stroke='%234a5a6a' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-size: 180px 70px;
-  animation: poleScroll 5s linear infinite;
-}
-@keyframes poleScroll {
-  from { background-position: 0 0; }
-  to   { background-position: -180px 0; }
-}
-
-/* ===== レイヤー5: 道路（下40%） ===== */
-.ts-road {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 43%;
-  /* アスファルトの質感グラデーション */
-  background: linear-gradient(180deg, #9a9a9a 0%, #727272 28%, #626262 100%);
-  z-index: 4;
-}
-/* 道路中央の黄色破線（アニメーション） */
-.ts-centerline {
-  position: absolute;
-  top: 38%;
-  left: 0; right: 0;
-  height: 4px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255, 215, 0, 0.75) 0px,
-    rgba(255, 215, 0, 0.75) 52px,
-    transparent 52px,
-    transparent 100px
-  );
-  animation: centerLineScroll 1.6s linear infinite;
-}
-@keyframes centerLineScroll {
-  from { background-position: 0 0; }
-  to   { background-position: -100px 0; }
-}
-
-/* ===== レイヤー6: トラック本体 ===== */
-.ts-truck-wrap {
-  position: absolute;
-  /* タイヤが道路面に乗るよう位置調整 */
-  bottom: 37%;
-  left: 50%;
-  /* 初期位置：画面右外（エントリー前は非表示） */
-  transform: translateX(calc(-55% + 115vw));
-  opacity: 0;
-  z-index: 5;
-  will-change: transform, opacity;
-}
-
-/* エントリーアニメーション（JSが.is-enteredクラスを追加） */
-.ts-truck-wrap.is-entered {
-  animation: truckEntry 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-/* エントリー後のアイドリング状態（JSが.is-bouncingクラスを追加） */
-.ts-truck-wrap.is-bouncing {
-  transform: translateX(-55%);
-  opacity: 1;
-}
-
-/* アイドリング時: 画像を上下振動させエンジン振動を表現 */
-.ts-truck-wrap.is-bouncing .ts-truck {
-  animation: truckBounce 0.42s ease-in-out infinite alternate;
-}
-
-/* ===== トラック画像 ===== */
-.ts-truck {
-  width: 380px;
+/* トラック写真本体 */
+.fleet-truck-photo {
+  display: inline-block;
+  max-width: 1040px;
+  width: 88%;
   height: auto;
-  display: block;
-  /* 白背景の写真を空と馴染ませる */
+  position: relative;
+  z-index: 2;
+  /* 白背景のPNGが白→透明に自然に溶け込む */
   mix-blend-mode: multiply;
-  /* 地面に落ちる影 */
-  filter: drop-shadow(6px 10px 14px rgba(0, 0, 0, 0.32));
-  will-change: transform;
+  /* 立体的な影 */
+  filter:
+    drop-shadow(0 18px 36px rgba(11, 92, 173, 0.14))
+    drop-shadow(0  4px  8px rgba(0, 0, 0, 0.10));
 }
-/* フォールバックSVGは画像エラー時のみ表示 */
-.ts-truck--svg {
-  display: none;
-  mix-blend-mode: normal;
-  filter: drop-shadow(4px 8px 10px rgba(0, 0, 0, 0.28));
-}
-/* noTruckImgクラスで切り替え */
-.ts-truck-wrap.no-truck-img img.ts-truck { display: none; }
-.ts-truck-wrap.no-truck-img .ts-truck--svg { display: block; }
-
-/* ===== エントリーキーフレーム ===== */
-@keyframes truckEntry {
-  0%   {
-    transform: translateX(calc(-55% + 115vw));
-    opacity: 0;
-  }
-  12%  { opacity: 1; }
-  80%  { transform: translateX(calc(-55% - 1.5%)); } /* 少しオーバーシュート */
-  90%  { transform: translateX(calc(-55% + 0.8%)); } /* 戻り */
-  100% {
-    transform: translateX(-55%);
-    opacity: 1;
-  }
-}
-
-/* ===== アイドリングバウンスキーフレーム ===== */
-@keyframes truckBounce {
-  from { transform: translateY(0px)    rotate(0deg); }
-  to   { transform: translateY(-5px) rotate(0.35deg); }
-}
-
-/* ===== スピードラインエフェクト（アイドリング時に表示） ===== */
-.ts-speed {
+/* ブランドタグ（右下コーナー） */
+.fleet-brand-tag {
   position: absolute;
-  /* トラックの左側（走ってきた方向）に放射 */
-  top: 52%;
-  right: 100%;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  opacity: 0;
-  pointer-events: none;
-}
-.ts-speed--1 { width: 90px;  margin-top: -18px; animation: speedFx 0.65s linear         infinite; }
-.ts-speed--2 { width: 55px;  margin-top:   0px; animation: speedFx 0.65s linear 0.22s   infinite; }
-.ts-speed--3 { width: 115px; margin-top:  20px; animation: speedFx 0.65s linear 0.11s   infinite; }
-
-/* スピードラインはis-bouncing時のみ表示 */
-.ts-truck-wrap:not(.is-bouncing) .ts-speed { display: none; }
-
-@keyframes speedFx {
-  0%   { opacity: 0; transform: translateX(50px); }
-  20%  { opacity: 0.7; }
-  100% { opacity: 0; transform: translateX(-90px); }
-}
-
-/* ===== テキストオーバーレイ（エントリー後にフェードイン） ===== */
-.ts-overlay-text {
-  position: absolute;
-  /* 道路上端・右側に配置 */
-  bottom: 45%;
   right: 5%;
-  z-index: 6;
+  bottom: 12px;
   text-align: right;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s;
   pointer-events: none;
 }
-/* scene-activeクラスが付いたら表示 */
-.truck-scene-wrap.scene-active .ts-overlay-text {
-  opacity: 1;
-  transform: translateY(0);
-}
-.ts-overlay-label {
+.fleet-brand-tag__label {
   display: block;
   font-family: var(--font-en);
-  font-size: clamp(17px, 2vw, 24px);
+  font-size: clamp(15px, 1.8vw, 22px);
   font-weight: 700;
-  color: var(--accent-gold);
-  letter-spacing: 0.1em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  color: var(--blue-primary);
+  letter-spacing: 0.08em;
+  opacity: 0.75;
 }
-.ts-overlay-sub {
+.fleet-brand-tag__sub {
   display: block;
   font-family: var(--font-jp-serif);
-  font-size: clamp(10px, 1.1vw, 13px);
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
-  margin-top: 4px;
-  letter-spacing: 0.08em;
+  font-size: clamp(10px, 1vw, 12px);
+  color: var(--slate-mid);
+  letter-spacing: 0.06em;
+  margin-top: 3px;
 }
 
 /* ===== 車両タイプカード ===== */
@@ -2060,22 +1871,130 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   line-height: 1.75;
 }
 
+/* ============================================================
+   グループ事業セクション
+   ============================================================ */
+.group-section__lead {
+  font-size: 15px;
+  color: var(--slate-mid);
+  line-height: 1.85;
+  margin-top: 12px;
+  text-align: center;
+}
+/* ===== グループカード グリッド ===== */
+.group-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 48px;
+}
+/* ===== グループカード本体 ===== */
+.group-card {
+  display: block;
+  position: relative;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+.group-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue-primary);
+}
+/* ネイビーアクセントライン（物流ハシムラ） */
+.group-card__accent {
+  height: 6px;
+}
+.group-card__accent--navy  { background: linear-gradient(90deg, var(--blue-primary) 0%, var(--blue-dark) 100%); }
+.group-card__accent--green { background: linear-gradient(90deg, #2d7a3a 0%, #1c5c26 100%); }
+
+.group-card__content {
+  display: flex;
+  gap: 20px;
+  padding: 28px 28px 32px;
+  align-items: flex-start;
+}
+/* アイコン */
+.group-card__icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-light);
+  border-radius: 16px;
+  border: 1.5px solid rgba(11, 92, 173, 0.15);
+  color: var(--blue-primary);
+}
+.group-card--green .group-card__icon {
+  background: rgba(45, 122, 58, 0.08);
+  border-color: rgba(45, 122, 58, 0.2);
+  color: #2d7a3a;
+}
+/* タグ */
+.group-card__tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--blue-primary);
+  background: var(--blue-light);
+  border-radius: 100px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+.group-card__tag--green {
+  color: #2d7a3a;
+  background: rgba(45, 122, 58, 0.08);
+}
+/* 会社名 */
+.group-card__name {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  color: var(--slate-dark);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+/* 説明文 */
+.group-card__desc {
+  font-size: 13px;
+  color: var(--text-body);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+/* CTAリンク */
+.group-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue-primary);
+  letter-spacing: 0.04em;
+}
+.group-card__cta--green { color: #2d7a3a; }
+
 /* ===== レスポンシブ ===== */
 @media (max-width: 900px) {
-  .truck-stage { padding: 56px 0 0; }
-  .truck-scene-wrap { height: 240px; }
-  .ts-truck { width: 300px; }
-  .ts-truck-wrap { bottom: 35%; }
-  .ts-mountains { height: 70px; }
+  .fleet-section { padding: 64px 0 0; }
+  .fleet-truck-photo { width: 95%; }
+}
+@media (max-width: 700px) {
+  .group-cards { grid-template-columns: 1fr; gap: 20px; }
+  .group-card__content { padding: 22px 20px 26px; gap: 16px; }
+  .group-card__icon { width: 52px; height: 52px; border-radius: 12px; }
 }
 @media (max-width: 600px) {
-  .truck-stage { padding: 48px 0 0; }
-  .truck-scene-wrap { height: 190px; }
-  .ts-truck { width: 220px; }
-  .ts-truck-wrap { bottom: 33%; }
-  .ts-mountains { height: 55px; bottom: 41%; }
-  .ts-poles { height: 50px; bottom: 38%; }
-  .ts-overlay-text { display: none; } /* モバイルではテキスト非表示 */
+  .fleet-section { padding: 56px 0 0; }
+  .fleet-truck-stage { padding: 32px 16px 0; }
+  .fleet-truck-photo { width: 100%; }
+  .fleet-brand-tag { display: none; }
   .truck-types { grid-template-columns: 1fr; gap: 16px; padding: 32px 0 56px; }
   .truck-type-card { padding: 20px 18px; gap: 16px; }
   .truck-type-card__icon { width: 44px; height: 44px; border-radius: 11px; }
