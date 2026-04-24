@@ -1547,6 +1547,138 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
+   ナビゲーション ドロップダウン（グループ事業）
+   ============================================================ */
+
+/* PCドロップダウン */
+.has-dropdown {
+  position: relative;
+}
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.dropdown-trigger svg {
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+.has-dropdown:hover .dropdown-trigger svg {
+  transform: rotate(180deg);
+}
+.nav__dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px;
+  min-width: 210px;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  overflow: hidden;
+  list-style: none;
+  padding: 6px 0;
+}
+/* 矢印（吹き出し） */
+.nav__dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top: none;
+  border-bottom-color: var(--border-light);
+}
+.nav__dropdown::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top: none;
+  border-bottom-color: var(--white);
+}
+.has-dropdown:hover .nav__dropdown {
+  display: block;
+  animation: dropdownFade 0.15s ease;
+}
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.nav__dropdown li { list-style: none; }
+.nav__dropdown a {
+  display: block;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate-dark);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.02em;
+}
+.nav__dropdown a:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+.nav__dropdown a[aria-current="page"] {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+/* モバイルドロワー グループラベル */
+.nav-drawer__group-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-gold);
+  padding: 12px 24px 4px;
+  text-transform: uppercase;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 4px;
+  list-style: none;
+}
+.nav-drawer__sub a {
+  padding-left: 36px !important;
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+.nav-drawer__sub a::before {
+  content: '— ';
+  opacity: 0.5;
+}
+
+/* ============================================================
+   フッター ブランドバッジ（HASHIMURA UNSOUロゴ）
+   ============================================================ */
+.footer__brand-badge {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+}
+.footer__badge-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.15);
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.footer__badge-img:hover { opacity: 1; }
+.footer__badge-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
    ヒーロー統計バー：SVGアイコン + テキスト型（トラック種別）
    ============================================================ */
 .stat__icon {

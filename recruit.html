@@ -340,6 +340,41 @@
   flex-wrap: wrap;
 }
 
+/* お問い合わせバッジ */
+.inquiry-cell { vertical-align: middle; }
+.inquiry-badge {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border: 1px solid rgba(11,92,173,0.2);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.inquiry-note {
+  display: block;
+  font-size: 11px;
+  color: var(--slate-mid);
+  margin-top: 3px;
+}
+
+/* トレーラー特別カード */
+.job-card__header--gold {
+  background: linear-gradient(135deg, #8B6914, var(--accent-gold));
+}
+.job-card__badge--dark {
+  background: rgba(0,0,0,0.25);
+  color: var(--white);
+}
+.job-card__header-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+}
+
 /* レスポンシブ */
 @media (max-width: 900px) {
   .flow__steps { flex-direction: column; gap: 16px; }
@@ -371,7 +406,17 @@
         <li><a href="index.html#strengths">当社の強み</a></li>
         <li><a href="index.html#safety">安全への取り組み</a></li>
         <li><a href="index.html#company">会社概要</a></li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-trigger" aria-haspopup="true">グループ事業
+            <svg width="10" height="10" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M0 0l5 6 5-6z"/></svg>
+          </a>
+          <ul class="nav__dropdown" role="menu">
+            <li role="menuitem"><a href="fleet-hashimura.html">合同会社物流ハシムラ</a></li>
+            <li role="menuitem"><a href="kasuga-logistics.html">春日物流</a></li>
+          </ul>
+        </li>
         <li><a href="recruit.html" aria-current="page">採用情報</a></li>
+        <li><a href="news.html">お知らせ</a></li>
         <li><a href="index.html#contact">お問い合わせ</a></li>
       </ul>
       <div class="header-tel">
@@ -395,7 +440,11 @@
     <li><a href="index.html#strengths">当社の強み</a></li>
     <li><a href="index.html#safety">安全への取り組み</a></li>
     <li><a href="index.html#company">会社概要</a></li>
+    <li class="nav-drawer__group-label">グループ事業</li>
+    <li class="nav-drawer__sub"><a href="fleet-hashimura.html">合同会社物流ハシムラ</a></li>
+    <li class="nav-drawer__sub"><a href="kasuga-logistics.html">春日物流</a></li>
     <li><a href="recruit.html">採用情報</a></li>
+    <li><a href="news.html">お知らせ</a></li>
     <li><a href="index.html#contact">お問い合わせ</a></li>
   </ul>
   <div class="nav-drawer__tel">
@@ -472,19 +521,28 @@
               </tr>
               <tr>
                 <th>給与</th>
-                <td>月給 230,000円〜（経験・スキルにより優遇）</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                  <span class="inquiry-note">経験・スキルにより優遇いたします</span>
+                </td>
               </tr>
               <tr>
                 <th>勤務時間</th>
-                <td>7:00〜17:00（実働8時間）<br>※繁忙期は残業あり</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
               </tr>
               <tr>
                 <th>休日</th>
-                <td>日曜・祝日、他シフト制<br>年間休日：105日</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
               </tr>
               <tr>
                 <th>待遇</th>
-                <td>社会保険完備、交通費支給、<br>各種手当あり（詳細は下記）</td>
+                <td>社会保険完備、交通費支給、各種手当あり<br>
+                  <span style="font-size:12px;color:var(--slate-mid);">※詳細は面談時にご説明いたします</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -513,19 +571,79 @@
               </tr>
               <tr>
                 <th>給与</th>
-                <td>月給 195,000円〜（経験・スキルにより優遇）</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                  <span class="inquiry-note">未経験者も考慮した給与設定</span>
+                </td>
               </tr>
               <tr>
                 <th>勤務時間</th>
-                <td>7:00〜17:00（実働8時間）<br>※繁忙期は残業あり</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
               </tr>
               <tr>
                 <th>休日</th>
-                <td>日曜・祝日、他シフト制<br>年間休日：105日</td>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
               </tr>
               <tr>
                 <th>待遇</th>
-                <td>社会保険完備、交通費支給、<br>免許取得支援制度あり</td>
+                <td>社会保険完備、交通費支給、免許取得支援制度あり<br>
+                  <span style="font-size:12px;color:var(--slate-mid);">※詳細は面談時にご説明いたします</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <!-- トレーラードライバー（新規追加） -->
+      <article class="job-card job-card--special fade-in fade-in--delay-1">
+        <div class="job-card__header job-card__header--gold">
+          <span class="job-card__badge job-card__badge--dark">正社員</span>
+          <h3 class="job-card__title">トレーラードライバー<br>（コンクリートポール・重量物輸送）</h3>
+          <p class="job-card__header-note">牽引免許を活かせるスペシャリスト職</p>
+        </div>
+        <div class="job-card__body">
+          <table class="job-detail-table">
+            <tbody>
+              <tr>
+                <th>勤務地</th>
+                <td>本社（熊本市西区春日）<br>大津営業所（菊池郡大津町）</td>
+              </tr>
+              <tr>
+                <th>仕事内容</th>
+                <td>電力関連コンクリートポール・重量物のトレーラー輸送。先導車との協調作業。九州各地の工事現場へ届けます。</td>
+              </tr>
+              <tr>
+                <th>資格</th>
+                <td>牽引免許（必須）<br>大型自動車免許（必須）<br>大型特殊免許（あれば尚可）</td>
+              </tr>
+              <tr>
+                <th>給与</th>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                  <span class="inquiry-note">牽引免許保有者は優遇いたします</span>
+                </td>
+              </tr>
+              <tr>
+                <th>勤務時間</th>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
+              </tr>
+              <tr>
+                <th>休日</th>
+                <td class="inquiry-cell">
+                  <span class="inquiry-badge">📞 お問い合わせください</span>
+                </td>
+              </tr>
+              <tr>
+                <th>待遇</th>
+                <td>社会保険完備、交通費支給、各種手当あり<br>
+                  <span style="font-size:12px;color:var(--slate-mid);">※詳細は面談時にご説明いたします</span>
+                </td>
               </tr>
             </tbody>
           </table>

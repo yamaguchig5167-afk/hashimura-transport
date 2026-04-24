@@ -103,6 +103,15 @@
         <li><a href="#strengths">当社の強み</a></li>
         <li><a href="#safety">安全への取り組み</a></li>
         <li><a href="#company">会社概要</a></li>
+        <li class="has-dropdown">
+          <a href="#" class="dropdown-trigger" aria-haspopup="true">グループ事業
+            <svg width="10" height="10" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M0 0l5 6 5-6z"/></svg>
+          </a>
+          <ul class="nav__dropdown" role="menu">
+            <li role="menuitem"><a href="fleet-hashimura.html">合同会社物流ハシムラ</a></li>
+            <li role="menuitem"><a href="kasuga-logistics.html">春日物流</a></li>
+          </ul>
+        </li>
         <li><a href="recruit.html">採用情報</a></li>
         <li><a href="news.html">お知らせ</a></li>
         <li><a href="#contact">お問い合わせ</a></li>
@@ -128,6 +137,9 @@
     <li><a href="#strengths">当社の強み</a></li>
     <li><a href="#safety">安全への取り組み</a></li>
     <li><a href="#company">会社概要</a></li>
+    <li class="nav-drawer__group-label">グループ事業</li>
+    <li class="nav-drawer__sub"><a href="fleet-hashimura.html">合同会社物流ハシムラ</a></li>
+    <li class="nav-drawer__sub"><a href="kasuga-logistics.html">春日物流</a></li>
     <li><a href="recruit.html">採用情報</a></li>
     <li><a href="news.html">お知らせ</a></li>
     <li><a href="#contact">お問い合わせ</a></li>
@@ -584,10 +596,16 @@
             <strong>メール</strong><br>
             <a href="mailto:hashimura@dolphin.ocn.ne.jp" class="link--email">hashimura@dolphin.ocn.ne.jp</a>
           </div>
-          <!-- GOOGLE MAP：差し替えエリア -->
+          <!-- GOOGLE MAP：本社 -->
           <div class="map-embed" id="map-honsha">
-            <!-- ここにGoogleマップのiframeを埋め込む -->
-            🗺️ Googleマップを埋め込めます
+            <iframe
+              src="https://maps.google.com/maps?q=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E8%A5%BF%E5%8C%BA%E6%98%A5%E6%97%A57-13-7&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="100%"
+              frameborder="0" style="border:0; display:block;"
+              allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="有限会社橋村運送 本社所在地マップ">
+            </iframe>
           </div>
         </address>
         <!-- 大津営業所 -->
@@ -602,10 +620,16 @@
             <strong>FAX</strong><br>
             096-284-5008
           </div>
-          <!-- GOOGLE MAP：差し替えエリア -->
+          <!-- GOOGLE MAP：大津営業所 -->
           <div class="map-embed" id="map-ozu">
-            <!-- ここにGoogleマップのiframeを埋め込む -->
-            🗺️ Googleマップを埋め込めます
+            <iframe
+              src="https://maps.google.com/maps?q=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8F%8A%E6%B1%A0%E9%83%A1%E5%A4%A7%E6%B4%A5%E7%94%BA%E6%9D%89%E6%B0%B43533&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="100%"
+              frameborder="0" style="border:0; display:block;"
+              allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="有限会社橋村運送 大津営業所所在地マップ">
+            </iframe>
           </div>
         </address>
       </div>
@@ -739,6 +763,37 @@
         <p class="footer__tagline">
           九州の電力インフラを足元から支える、<br>現場力のある輸送会社。
         </p>
+        <!-- ブランドバッジロゴ -->
+        <div class="footer__brand-badge">
+          <img
+            src="images/logo-badge.png"
+            alt="HASHIMURA UNSOU ブランドロゴ"
+            class="footer__badge-img"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <!-- 写真がない場合のSVGフォールバック -->
+          <div class="footer__badge-svg" aria-hidden="true" style="display:none;">
+            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+              <rect width="240" height="240" rx="16" fill="#5566F8"/>
+              <text x="120" y="112" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
+                fill="none" stroke="white" stroke-width="2" text-anchor="middle" letter-spacing="3">HASHIMURA</text>
+              <text x="69" y="155" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
+                fill="none" stroke="white" stroke-width="2" text-anchor="start" letter-spacing="3">UNS</text>
+              <!-- ギアアイコン（O代替） -->
+              <g transform="translate(163,140)">
+                <circle r="16" fill="none" stroke="white" stroke-width="2"/>
+                <circle r="7" fill="none" stroke="white" stroke-width="2"/>
+                <rect x="-3" y="-20" width="6" height="7" rx="1" fill="white"/>
+                <rect x="-3" y="13" width="6" height="7" rx="1" fill="white"/>
+                <rect x="-20" y="-3" width="7" height="6" rx="1" fill="white"/>
+                <rect x="13" y="-3" width="7" height="6" rx="1" fill="white"/>
+              </g>
+              <text x="181" y="155" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
+                fill="none" stroke="white" stroke-width="2" text-anchor="start" letter-spacing="3">U</text>
+            </svg>
+          </div>
+        </div>
       </div>
       <div>
         <p class="footer__nav-title">Navigation</p>
