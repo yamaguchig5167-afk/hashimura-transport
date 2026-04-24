@@ -277,29 +277,51 @@ function initCounters() {
 }
 
 /* ============================================================
-   トラック写真 → SVGフォールバック制御
-   images/truck-unic.png がない場合はSVGシルエットを表示する
+   トラックステージ アニメーション制御
+   スクロールでシーンが見えたらトラックが右から飛び込み、
+   停車後はアイドリングバウンスに切り替える
    ============================================================ */
-function initTruckFallback() {
-  const truckImg = document.querySelector('img.truck-driving');
-  const truckSvg = document.querySelector('.truck-driving--svg');
-  if (!truckImg || !truckSvg) return;
+function initTruckScene() {
+  // 観察対象: シーンラッパー全体
+  const scene = document.getElementById('truck-scene');
+  if (!scene) return;
 
-  const showSvg = () => {
-    truckImg.style.display = 'none';
-    truckSvg.style.display = 'block';
-  };
-  const showImg = () => {
-    truckSvg.style.display = 'none';
-  };
+  // アニメーションを受け取るトラックラッパー
+  const truckWrap = scene.querySelector('.ts-truck-wrap');
+  if (!truckWrap) return;
 
-  // 既にキャッシュ済みかどうか確認
-  if (truckImg.complete) {
-    truckImg.naturalWidth === 0 ? showSvg() : showImg();
-  } else {
-    truckImg.addEventListener('load',  showImg);
-    truckImg.addEventListener('error', showSvg);
-  }
+  let hasEntered = false;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        // シーンが画面内に30%以上入ったら発火（1回のみ）
+        if (entry.isIntersecting && !hasEntered) {
+          hasEntered = true;
+          observer.unobserve(scene);
+
+          // エントリーアニメーション開始
+          truckWrap.classList.add('is-entered');
+
+          // テキストオーバーレイを少し遅らせてフェードイン
+          setTimeout(() => {
+            scene.classList.add('scene-active');
+          }, 700);
+
+          // CSS animationend を受け取ってバウンスに切り替え
+          truckWrap.addEventListener('animationend', () => {
+            truckWrap.classList.remove('is-entered');
+            truckWrap.classList.add('is-bouncing');
+          }, { once: true });
+        }
+      });
+    },
+    {
+      threshold: 0.3, // 30%以上表示されたらトリガー
+    }
+  );
+
+  observer.observe(scene);
 }
 
 /* ============================================================
@@ -312,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initContactForm();
   initCounters();
-  initTruckFallback(); // トラック写真フォールバック
+  initTruckScene(); // トラックステージ アニメーション
 
   console.log(
     '%c有限会社橋村運送 公式サイト',
