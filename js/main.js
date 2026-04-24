@@ -277,6 +277,32 @@ function initCounters() {
 }
 
 /* ============================================================
+   トラック写真 → SVGフォールバック制御
+   images/truck-unic.png がない場合はSVGシルエットを表示する
+   ============================================================ */
+function initTruckFallback() {
+  const truckImg = document.querySelector('img.truck-driving');
+  const truckSvg = document.querySelector('.truck-driving--svg');
+  if (!truckImg || !truckSvg) return;
+
+  const showSvg = () => {
+    truckImg.style.display = 'none';
+    truckSvg.style.display = 'block';
+  };
+  const showImg = () => {
+    truckSvg.style.display = 'none';
+  };
+
+  // 既にキャッシュ済みかどうか確認
+  if (truckImg.complete) {
+    truckImg.naturalWidth === 0 ? showSvg() : showImg();
+  } else {
+    truckImg.addEventListener('load',  showImg);
+    truckImg.addEventListener('error', showSvg);
+  }
+}
+
+/* ============================================================
    初期化
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -286,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initContactForm();
   initCounters();
+  initTruckFallback(); // トラック写真フォールバック
 
   console.log(
     '%c有限会社橋村運送 公式サイト',
