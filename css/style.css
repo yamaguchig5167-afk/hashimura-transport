@@ -651,18 +651,15 @@ ul { list-style: none; }
   .trust-item { flex: 1 1 50%; border-bottom: 1px solid rgba(255,255,255,0.06); }
 }
 
-/* ===== 事業内容 ===== */
+/* ===== 事業内容（4枚 2×2グリッド） ===== */
 .services__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   margin-top: 56px;
 }
-@media (max-width: 900px) {
-  .services__grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 600px) {
-  .services__grid { grid-template-columns: 1fr; }
+  .services__grid { grid-template-columns: 1fr; gap: 16px; }
 }
 .service-card {
   background: var(--white);
@@ -886,9 +883,30 @@ ul { list-style: none; }
   transform: translateY(-4px);
 }
 .safety-card__icon {
-  font-size: 36px;
-  margin-bottom: 16px;
-  display: block;
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+  border: 1px solid rgba(200,168,75,0.2);
+  transition: var(--transition);
+}
+.safety-card__icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--accent-gold);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.safety-card:hover .safety-card__icon {
+  background: rgba(200,168,75,0.15);
+  border-color: rgba(200,168,75,0.4);
 }
 .safety-card__name {
   font-size: 15px;
@@ -1016,24 +1034,17 @@ ul { list-style: none; }
   margin-top: 16px;
   border-radius: 8px;
   overflow: hidden;
-  height: 160px;
+  height: 180px;
+  border: 1px solid var(--border-light);
   background: var(--blue-light);
-  border: 2px dashed rgba(11,92,173,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: var(--blue-primary);
-  font-weight: 600;
-  letter-spacing: 0.08em;
 }
-/* 実際のiframe差し替え時：
+/* Googleマップiframe表示 */
 .map-embed iframe {
   width: 100%;
   height: 100%;
   border: none;
+  display: block;
 }
-*/
 
 /* ===== CTAバナー ===== */
 .cta-section {
@@ -1178,6 +1189,12 @@ ul { list-style: none; }
   border-radius: 10px;
   border: 1px solid rgba(11,92,173,0.15);
   margin-top: 16px;
+}
+.contact__note {
+  font-size: 13px;
+  color: var(--slate-mid);
+  line-height: 1.8;
+  margin-bottom: 16px;
 }
 .contact__email-label {
   font-size: 12px;
@@ -1346,6 +1363,10 @@ ul { list-style: none; }
   color: var(--blue-mid);
 }
 .footer__nav-links a:hover { color: var(--white); }
+/* グループ事業タイトルの上マージン（インラインstyle代替） */
+.footer__nav-links + .footer__nav-title {
+  margin-top: 28px;
+}
 .footer__contact-item {
   font-size: 13px;
   color: rgba(255,255,255,0.6);
@@ -1478,7 +1499,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     margin-top: 36px;
   }
   .safety-card { padding: 20px 14px; }
-  .safety-card__icon { font-size: 26px; margin-bottom: 8px; }
+  .safety-card__icon { width: 42px; height: 42px; margin-bottom: 12px; border-radius: 10px; }
+  .safety-card__icon svg { width: 22px; height: 22px; }
   .safety-card__name { font-size: 13px; margin-bottom: 6px; }
   .safety-card__desc { font-size: 11px; line-height: 1.65; }
 
