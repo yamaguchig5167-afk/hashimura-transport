@@ -234,6 +234,7 @@ ul { list-style: none; }
   font-weight: 700;
   color: var(--slate-dark);
   letter-spacing: 0.04em;
+  white-space: nowrap; /* ロゴを1行に固定 */
 }
 .logo__jp span { color: var(--blue-primary); }
 
@@ -651,14 +652,14 @@ ul { list-style: none; }
   .trust-item { flex: 1 1 50%; border-bottom: 1px solid rgba(255,255,255,0.06); }
 }
 
-/* ===== 事業内容（4枚 2×2グリッド） ===== */
+/* ===== 事業内容（3枚 横並び） ===== */
 .services__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 56px;
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .services__grid { grid-template-columns: 1fr; gap: 16px; }
 }
 .service-card {
@@ -771,7 +772,8 @@ ul { list-style: none; }
 }
 .strengths__badge {
   position: absolute;
-  top: -20px; right: -20px;
+  bottom: -20px; right: -20px; /* テキストに被らないよう右下に移動 */
+  top: auto;
   background: var(--accent-gold);
   color: var(--slate-dark);
   width: 100px; height: 100px;
@@ -2014,17 +2016,37 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   line-height: 1.8;
   margin-bottom: 18px;
 }
-/* CTAリンク */
+/* CTAボタン（目立つボタン形式） */
 .group-card__cta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  background: var(--blue-primary);
+  color: var(--white);
+  padding: 11px 22px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--blue-primary);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 3px 12px rgba(11,92,173,0.25);
+  margin-top: 4px;
 }
-.group-card__cta--green { color: #2d7a3a; }
+.group-card:hover .group-card__cta {
+  background: var(--blue-dark);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(11,92,173,0.35);
+}
+.group-card__cta--green {
+  background: #2d7a3a;
+  color: var(--white);
+  box-shadow: 0 3px 12px rgba(45,122,58,0.25);
+}
+.group-card--green:hover .group-card__cta--green {
+  background: #1c5c26;
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(45,122,58,0.35);
+}
 
 /* ===== レスポンシブ ===== */
 @media (max-width: 900px) {
