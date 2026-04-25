@@ -513,6 +513,13 @@ ul { list-style: none; }
 .hero__badge--secondary::before {
   background: rgba(255,255,255,0.7);
 }
+/* Gマークバッジ */
+.hero__badge--g {
+  background: rgba(200,168,75,0.22);
+  border-color: rgba(200,168,75,0.6);
+  color: var(--accent-gold);
+}
+.hero__badge--g::before { display: none; } /* ドットの代わりにSVGアイコン */
 .hero__headline {
   font-family: var(--font-jp-serif);
   font-size: clamp(28px, 5vw, 54px);
@@ -880,6 +887,77 @@ ul { list-style: none; }
   font-size: 13px;
   color: var(--slate-mid);
   line-height: 1.8;
+}
+
+/* ===== Gマーク認定バナー ===== */
+.g-mark-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(135deg,
+    rgba(200,168,75,0.18) 0%,
+    rgba(200,168,75,0.08) 100%
+  );
+  border: 1.5px solid rgba(200,168,75,0.45);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.g-mark-banner::before {
+  content: 'G';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-en);
+  font-size: 160px;
+  font-weight: 700;
+  color: rgba(200,168,75,0.06);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+.g-mark-banner__icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(200,168,75,0.15);
+  border: 1.5px solid rgba(200,168,75,0.4);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent-gold);
+}
+.g-mark-banner__label {
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.g-mark-banner__title {
+  font-family: var(--font-jp-serif);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+.g-mark-banner__desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+}
+@media (max-width: 600px) {
+  .g-mark-banner { flex-direction: column; gap: 16px; padding: 22px 20px; }
+  .g-mark-banner__icon { width: 52px; height: 52px; border-radius: 12px; }
+  .g-mark-banner::before { font-size: 100px; }
 }
 
 /* ===== 安全への取り組み ===== */
