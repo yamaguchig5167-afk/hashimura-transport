@@ -314,6 +314,17 @@ ul { list-style: none; }
   border-radius: 2px;
   transition: var(--transition);
 }
+/* ハンバーガー → × アニメーション（メニューオープン時） */
+.hamburger.is-active .hamburger__line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.is-active .hamburger__line:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+.hamburger.is-active .hamburger__line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* モバイルドロワー */
 .nav-drawer {
@@ -531,6 +542,30 @@ ul { list-style: none; }
   flex-wrap: wrap;
   animation: fadeInUp 0.6s 0.4s both;
 }
+/* スクロール誘導（ヒーロー内：CTAの下） */
+.hero__scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 44px;
+  font-family: var(--font-en);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+  animation: fadeInUp 0.6s 0.7s both;
+}
+.hero__scroll-hint svg {
+  animation: bounceDown 1.8s ease infinite;
+  opacity: 0.5;
+}
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+@media (max-width: 600px) {
+  .hero__scroll-hint { display: none; }
+}
 /* 統計バー（フル幅・底面） */
 .hero__stats {
   position: absolute;
@@ -632,6 +667,11 @@ ul { list-style: none; }
 }
 
 /* ===== 事業内容（3枚 横並び） ===== */
+/* 事業内容セクション下部CTA */
+.services__cta {
+  text-align: center;
+  margin-top: 48px;
+}
 .services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2048,4 +2088,46 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .truck-type-card__icon svg { width: 22px; height: 22px; }
   .truck-type-card__name { font-size: 16px; }
   .truck-type-card__desc { font-size: 13px; }
+}
+
+/* ============================================================
+   トップへ戻るボタン
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 100px; /* モバイルでは電話バーの上 */
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: var(--blue-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(11,92,173,0.4);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  z-index: 900;
+  pointer-events: none;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  background: var(--blue-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(11,92,173,0.5);
+}
+/* デスクトップではサイドバーとの干渉なし */
+@media (min-width: 901px) {
+  .back-to-top { bottom: 40px; }
+}
+@media (max-width: 600px) {
+  .back-to-top { bottom: 76px; right: 14px; width: 44px; height: 44px; }
 }

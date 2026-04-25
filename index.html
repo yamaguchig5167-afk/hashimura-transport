@@ -197,6 +197,12 @@
         096-355-0361
       </a>
     </div>
+
+    <!-- スクロールダウン誘導 -->
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
   </div>
 
   <!-- 統計バー（フル幅・底面）→ 車両タイプ表示 -->
@@ -278,6 +284,21 @@
       <p class="section__label">Our Fleet</p>
       <h2 class="fleet-section__title">橋村運送の車両が、<br><em>今日も九州のインフラを支える</em></h2>
       <p class="fleet-section__lead">電柱・コンクリートポールなど長尺・大型資材の輸送に特化した平ボディ車・ユニック車を保有。九州全域の現場へ確実にお届けします。</p>
+    </div>
+  </div>
+
+  <!-- トラック写真ステージ（truck-unic.png があれば表示、なければ非表示） -->
+  <div class="fleet-truck-stage" id="fleet-truck-stage">
+    <img
+      src="images/truck-unic.png"
+      alt="橋村運送のユニック車 — 電力インフラ資材輸送に特化した専用車両"
+      class="fleet-truck-photo"
+      loading="lazy"
+      onerror="document.getElementById('fleet-truck-stage').style.display='none';"
+    >
+    <div class="fleet-brand-tag" aria-hidden="true">
+      <span class="fleet-brand-tag__label">HASHIMURA TRANSPORT</span>
+      <span class="fleet-brand-tag__sub">有限会社橋村運送</span>
     </div>
   </div>
 
@@ -363,6 +384,14 @@
         <h3 class="service-card__name">建設資材輸送</h3>
         <p class="service-card__desc">鉄骨・鋼材・セメント・砂利・コンクリート二次製品など、建設現場に不可欠な資材を輸送します。平ボディ車・ユニック車を活用し、大型重量物から精密資材まで確実に届けます。</p>
       </article>
+    </div>
+
+    <!-- 事業内容詳細ページへのCTA -->
+    <div class="services__cta fade-in">
+      <a href="services.html" class="btn btn--primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        事業内容の詳細を見る
+      </a>
     </div>
   </div>
 </section>
@@ -854,11 +883,16 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <p>© 2025 有限会社橋村運送 All Rights Reserved.</p>
+      <p>© 2025–2026 有限会社橋村運送 All Rights Reserved.</p>
       <p>制作：YOHAKU Lab.</p>
     </div>
   </div>
 </footer>
+
+<!-- トップへ戻るボタン -->
+<button class="back-to-top" id="back-to-top" aria-label="ページトップへ戻る" tabindex="-1">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <!-- JavaScript -->
 <script src="js/main.js"></script>

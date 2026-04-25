@@ -277,6 +277,30 @@ function initCounters() {
 }
 
 /* ============================================================
+   トップへ戻るボタン
+   ============================================================ */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  // 400px以上スクロールしたらボタン表示
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      btn.classList.add('is-visible');
+      btn.tabIndex = 0;
+    } else {
+      btn.classList.remove('is-visible');
+      btn.tabIndex = -1;
+    }
+  }, { passive: true });
+
+  // クリックでスムーズスクロール
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ============================================================
    保有車両セクション — 特別な処理なし
    スクロールフェードは initScrollAnimation() が担当
    ============================================================ */
@@ -291,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initContactForm();
   initCounters();
+  initBackToTop();
 
   console.log(
     '%c有限会社橋村運送 公式サイト',
