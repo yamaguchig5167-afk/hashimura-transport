@@ -1471,7 +1471,7 @@ ul { list-style: none; }
   color: var(--blue-mid);
 }
 .footer__nav-links a:hover { color: var(--white); }
-/* グループ事業タイトルの上マージン（インラインstyle代替） */
+/* 事業部紹介タイトルの上マージン（インラインstyle代替） */
 .footer__nav-links + .footer__nav-title {
   margin-top: 28px;
 }
@@ -1688,7 +1688,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
-   ナビゲーション ドロップダウン（グループ事業）
+   ナビゲーション ドロップダウン（事業部紹介）
    ============================================================ */
 
 /* PCドロップダウン */
@@ -1773,7 +1773,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   color: var(--blue-primary);
 }
 
-/* モバイルドロワー グループラベル */
+/* モバイルドロワー 事業部ラベル */
 .nav-drawer__group-label {
   font-size: 10px;
   font-weight: 700;
@@ -2026,7 +2026,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
-   グループ事業セクション
+   事業部紹介セクション
    ============================================================ */
 .group-section__lead {
   font-size: 15px;
@@ -2035,14 +2035,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   margin-top: 12px;
   text-align: center;
 }
-/* ===== グループカード グリッド ===== */
+/* ===== 事業部カード グリッド ===== */
 .group-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
   margin-top: 48px;
 }
-/* ===== グループカード本体 ===== */
+/* ===== 事業部カード本体 ===== */
 .group-card {
   display: block;
   position: relative;
@@ -2059,7 +2059,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   box-shadow: var(--shadow-lg);
   border-color: var(--blue-primary);
 }
-/* ネイビーアクセントライン（物流ハシムラ） */
+/* ネイビーアクセントライン（先導車事業部） */
 .group-card__accent {
   height: 6px;
 }

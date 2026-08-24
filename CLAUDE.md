@@ -22,8 +22,10 @@ hashimura-transport/
 ├── services.html          # 事業内容
 ├── recruit.html           # 採用情報
 ├── news.html              # お知らせ
-├── kasuga-logistics.html  # グループ会社：有限会社春日物流
-├── fleet-hashimura.html   # グループ会社：合同会社物流ハシムラ
+├── pilot-car.html         # 先導車事業部
+├── yard-operations.html   # 出荷ヤード作業事業部
+├── kasuga-logistics.html  # 【旧URL】yard-operations.html への転送用
+├── fleet-hashimura.html   # 【旧URL】pilot-car.html への転送用
 ├── css/
 │   └── style.css          # メインスタイルシート（全ページ共通）
 ├── js/
@@ -87,6 +89,10 @@ hashimura-transport/
 
 ### 基本原則
 - **会社情報は絶対に変更しない**（電話番号・住所・代表者名）
+- **旧グループ会社名をサイト上に出さない**（2026-08-24 クライアント指示）
+  - 「合同会社物流ハシムラ」→ **先導車事業部**（`pilot-car.html`）
+  - 「有限会社春日物流」→ **出荷ヤード作業事業部**（`yard-operations.html`）
+  - 「グループ事業／グループ会社」という区分も使わず、**橋村運送の事業部**として記載する
 - デザインカラーはパレット変数を使用すること
 - モバイルファーストで実装する
 - コメントは日本語で記載する

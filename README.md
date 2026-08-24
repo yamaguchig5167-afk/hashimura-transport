@@ -3,6 +3,13 @@
 熊本を拠点に電柱・電力インフラ資材輸送を行う「有限会社橋村運送」の公式サイト。
 静的HTML／CSS／バニラJSのみで構成し、GitHub Pages で公開している。
 
+> **表記ルール（2026-08-24〜）**
+> 旧「合同会社物流ハシムラ」「有限会社春日物流」は、**有限会社橋村運送の事業部**として表記する。
+> - 合同会社物流ハシムラ → **先導車事業部**（`pilot-car.html`）
+> - 有限会社春日物流 → **出荷ヤード作業事業部**（`yard-operations.html`）
+>
+> サイト上に旧社名を出さない。新規ページ作成時も同様。
+
 - 公開URL: https://yamaguchig5167-afk.github.io/hashimura-transport/
 - 制作・保守: ソルエイト株式会社
 
@@ -21,8 +28,10 @@ hashimura-transport/
 ├── services.html              ← 事業内容
 ├── recruit.html               ← 採用情報
 ├── news.html                  ← お知らせ
-├── kasuga-logistics.html      ← グループ会社：有限会社春日物流
-├── fleet-hashimura.html       ← グループ会社：合同会社物流ハシムラ
+├── pilot-car.html             ← 先導車事業部
+├── yard-operations.html       ← 出荷ヤード作業事業部
+├── kasuga-logistics.html      ← 【旧URL】yard-operations.html への転送用（1年後に削除可）
+├── fleet-hashimura.html       ← 【旧URL】pilot-car.html への転送用（1年後に削除可）
 │
 ├── css/style.css              ← スタイルシート（全ページ共通）
 ├── js/main.js                 ← JavaScript（フォーム送信・アニメーション）
