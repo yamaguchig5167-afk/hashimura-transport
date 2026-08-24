@@ -1,6 +1,6 @@
 /**
  * 有限会社橋村運送 公式サイト — メインJavaScript
- * 制作: YOHAKU Lab. / 山口 剛
+ * 制作: ソルエイト株式会社
  *
  * 機能:
  *   - スクロールアニメーション
@@ -17,15 +17,25 @@
    ============================================================ */
 const CONFIG = {
   // Google Apps Script デプロイURL
-  // GASを公開後、ここに貼り付けてください
+  // GASを公開後、ここに貼り付けてください（未設定の間はメール送信にフォールバックします）
   GAS_ENDPOINT: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
 
-  // メール送信先（GAS側で設定するが、確認用に記載）
+  // メール送信先（GAS未設定時のフォールバック送信先も兼ねる）
   CONTACT_EMAIL: 'hashimura@dolphin.ocn.ne.jp',
 
-  // デバッグモード（GASが未設定の場合はtrueにすると動作テスト可能）
-  DEBUG_MODE: true,
+  // 電話番号（送信失敗時の案内用）
+  CONTACT_TEL: '096-355-0361',
 };
+
+/**
+ * GASエンドポイントが正しく設定済みかを判定する。
+ * 未設定のまま「送信できたフリ」をしないための安全弁。
+ */
+function isGasConfigured() {
+  return typeof CONFIG.GAS_ENDPOINT === 'string'
+    && CONFIG.GAS_ENDPOINT.startsWith('https://script.google.com/macros/s/')
+    && !CONFIG.GAS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID');
+}
 
 /* ============================================================
    スクロールアニメーション（IntersectionObserver）
@@ -160,24 +170,27 @@ function initContactForm() {
     btn.textContent = '送信中...';
 
     try {
-      if (CONFIG.DEBUG_MODE && CONFIG.GAS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID')) {
-        // デバッグモード：GAS未設定時のモック動作
-        await mockDelay(1500);
-        showStatus(statusBox, 'success',
-          '✓ お問い合わせを受け付けました。2営業日以内にご連絡いたします。<br>' +
-          '<small>（現在はテストモードです。GASを設定すると実際に送信されます）</small>'
+      if (!isGasConfigured()) {
+        // GAS未設定：送信できたフリはせず、メールソフトでの送信に切り替える
+        openMailFallback(formData);
+        showStatus(statusBox, 'info',
+          'ご入力内容をメールでお送りいただけるよう、メールソフトを起動しました。<br>' +
+          'そのまま送信ボタンを押してください。<br>' +
+          '<small>メールソフトが開かない場合は、お電話（<a href="tel:0963550361"><strong>' +
+          CONFIG.CONTACT_TEL + '</strong></a>）または ' +
+          '<a href="mailto:' + CONFIG.CONTACT_EMAIL + '">' + CONFIG.CONTACT_EMAIL + '</a> ' +
+          'まで直接ご連絡ください。</small>'
         );
-        form.reset();
       } else {
         // 本番：GASへPOST送信
-        const response = await fetch(CONFIG.GAS_ENDPOINT, {
+        await fetch(CONFIG.GAS_ENDPOINT, {
           method: 'POST',
           mode:   'no-cors', // GASのCORS制約のため
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // no-corsで許可される型のみ
           body: JSON.stringify(formData),
         });
 
-        // no-corsのため応答確認はできないが、エラーなければ成功扱い
+        // no-corsのため応答確認はできないが、通信エラーがなければ受付扱い
         showStatus(statusBox, 'success',
           '✓ お問い合わせを受け付けました。<br>2営業日以内にご連絡いたします。'
         );
@@ -187,7 +200,7 @@ function initContactForm() {
       console.error('フォーム送信エラー:', err);
       showStatus(statusBox, 'error',
         '送信に失敗しました。お手数ですが、お電話またはメールにてご連絡ください。<br>' +
-        '<strong>096-355-0361</strong>'
+        '<strong>' + CONFIG.CONTACT_TEL + '</strong>'
       );
     } finally {
       btn.disabled    = false;
@@ -232,10 +245,44 @@ function showStatus(box, type, html) {
 }
 
 /**
- * デバッグ用遅延
+ * 入力内容からmailtoリンクを組み立てる（副作用なし・テスト可能）。
+ * @param {Object} data - フォームデータ
+ * @returns {string} mailto URL
  */
-function mockDelay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function buildMailtoHref(data) {
+  const subject = `【ホームページお問い合わせ】${data.inquiryType || 'お問い合わせ'}／${data.company}`;
+  const body = [
+    '有限会社橋村運送 御中',
+    '',
+    'ホームページのお問い合わせフォームより送信いたします。',
+    '',
+    '───────────────',
+    `会社名　　：${data.company}`,
+    `ご担当者名：${data.name}`,
+    `電話番号　：${data.tel}`,
+    `メール　　：${data.email || '（未入力）'}`,
+    `お問い合わせ種別：${data.inquiryType || '（未選択）'}`,
+    '───────────────',
+    '',
+    'お問い合わせ内容：',
+    data.message,
+    '',
+    `（送信日時：${data.timestamp}）`,
+  ].join('\r\n');
+
+  return `mailto:${CONFIG.CONTACT_EMAIL}`
+    + `?subject=${encodeURIComponent(subject)}`
+    + `&body=${encodeURIComponent(body)}`;
+}
+
+/**
+ * GAS未設定時のフォールバック：
+ * 入力内容を本文に差し込んだメール作成画面を開く。
+ * サーバー不要で問い合わせが必ず担当者に届くようにするための経路。
+ * @param {Object} data - フォームデータ
+ */
+function openMailFallback(data) {
+  window.location.href = buildMailtoHref(data);
 }
 
 /* ============================================================
@@ -321,9 +368,9 @@ document.addEventListener('DOMContentLoaded', () => {
     '%c有限会社橋村運送 公式サイト',
     'color:#0B5CAD; font-size:14px; font-weight:bold;'
   );
-  console.log('制作: YOHAKU Lab. / 山口 剛');
-  console.log('GAS_ENDPOINT:', CONFIG.GAS_ENDPOINT.includes('YOUR_DEPLOYMENT_ID')
-    ? '⚠️ 未設定（デバッグモード）'
-    : '✅ 設定済み'
+  console.log('制作: ソルエイト株式会社');
+  console.log('お問い合わせフォーム:', isGasConfigured()
+    ? '✅ GAS送信（設定済み）'
+    : '⚠️ GAS未設定のためメール送信にフォールバックします'
   );
 });

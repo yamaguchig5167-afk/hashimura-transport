@@ -5,8 +5,8 @@
 有限会社橋村運送の公式ホームページ。
 電柱輸送・電力インフラ資材輸送に特化した熊本の運送会社。
 
-**公開URL（予定）**: GitHub Pages (`hashimura-transport.github.io` 等)
-**制作担当**: YOHAKU Lab. / 山口 剛
+**公開URL**: https://yamaguchig5167-afk.github.io/hashimura-transport/
+**制作担当**: ソルエイト株式会社
 
 ---
 
@@ -16,16 +16,25 @@
 hashimura-transport/
 ├── CLAUDE.md              # このファイル（Claude Codeへの指示書）
 ├── README.md              # セットアップ・デプロイ手順
+├── robots.txt             # クローラ設定
+├── sitemap.xml            # サイトマップ（ページ追加時は必ず追記）
 ├── index.html             # トップページ
+├── services.html          # 事業内容
+├── recruit.html           # 採用情報
+├── news.html              # お知らせ
+├── kasuga-logistics.html  # グループ会社：有限会社春日物流
+├── fleet-hashimura.html   # グループ会社：合同会社物流ハシムラ
 ├── css/
-│   └── style.css          # メインスタイルシート
+│   └── style.css          # メインスタイルシート（全ページ共通）
 ├── js/
 │   └── main.js            # メインJavaScript
 ├── gas/
 │   └── form-handler.gs    # Google Apps Script（フォーム送信処理）
 ├── images/
-│   ├── README.md          # 画像差し替えガイド
-│   └── (差し替え用プレースホルダー)
+│   ├── favicon.svg        # ファビコン
+│   ├── ogp.png            # OGP画像（1200×630）
+│   ├── truck-unic.png     # ユニック車イラスト
+│   └── README.md          # 画像差し替えガイド
 └── .github/
     └── workflows/
         └── deploy.yml     # GitHub Pages 自動デプロイ
@@ -100,8 +109,10 @@ hashimura-transport/
 
 ### フォーム（GAS連携）
 - `gas/form-handler.gs` をデプロイしてエンドポイントURLを取得
-- `js/main.js` の `GAS_ENDPOINT` 定数を差し替える
+- `js/main.js` の `GAS_ENDPOINT` 定数を差し替える（判定は `isGasConfigured()` が自動で行う）
 - 送信成功・失敗のフィードバックを必ずユーザーに表示する
+- **禁止：送信が実際に行われていない状態で「受け付けました」と表示すること。**
+  GAS未設定時は `openMailFallback()` でメール作成画面を開き、その旨を正直に案内する
 
 ### 画像
 - `images/` フォルダに配置
@@ -135,5 +146,5 @@ hashimura-transport/
 
 ## 連絡先（制作担当）
 
-YOHAKU Lab. 山口 剛
-yamaguchi.g5167@gmail.com / 090-2505-7937
+ソルエイト株式会社
+g.yamaguchi@sol8-co.com / 090-2505-7937

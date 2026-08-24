@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ファビコン・テーマカラー -->
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/ogp.png">
+<meta name="theme-color" content="#0B5CAD">
+
 <!-- SEO -->
 <title>合同会社物流ハシムラ｜先導車サービス 熊本</title>
 <meta name="description" content="合同会社物流ハシムラは、コンクリートポール・電力関連資材の特殊車両先導車サービスを担う専門会社です。有限会社橋村運送グループ。熊本を拠点に九州全域対応。">
@@ -15,7 +20,7 @@
 <meta property="og:url"         content="https://yamaguchig5167-afk.github.io/hashimura-transport/fleet-hashimura.html">
 <meta property="og:title"       content="合同会社物流ハシムラ｜先導車サービス 熊本">
 <meta property="og:description" content="コンクリートポール・電力関連資材の特殊車両先導車サービスを担う専門会社。橋村運送グループ。">
-<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg">
+<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png">
 <meta property="og:locale"      content="ja_JP">
 <meta property="og:site_name"   content="有限会社橋村運送">
 
@@ -543,29 +548,53 @@
         <p class="footer__tagline">
           九州の電力インフラを足元から支える、<br>現場力のある輸送会社。
         </p>
-        <div class="footer__brand-badge">
-          <img src="images/logo-badge.png" alt="HASHIMURA UNSOU ブランドロゴ"
-               class="footer__badge-img" loading="lazy"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="footer__badge-svg" aria-hidden="true" style="display:none;">
-            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
-              <rect width="240" height="240" rx="16" fill="#5566F8"/>
-              <text x="120" y="112" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
-                fill="none" stroke="white" stroke-width="2" text-anchor="middle" letter-spacing="3">HASHIMURA</text>
-              <text x="69" y="155" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
-                fill="none" stroke="white" stroke-width="2" text-anchor="start" letter-spacing="3">UNS</text>
-              <g transform="translate(163,140)">
-                <circle r="16" fill="none" stroke="white" stroke-width="2"/>
-                <circle r="7" fill="none" stroke="white" stroke-width="2"/>
-                <rect x="-3" y="-20" width="6" height="7" rx="1" fill="white"/>
-                <rect x="-3" y="13" width="6" height="7" rx="1" fill="white"/>
-                <rect x="-20" y="-3" width="7" height="6" rx="1" fill="white"/>
-                <rect x="13" y="-3" width="7" height="6" rx="1" fill="white"/>
-              </g>
-              <text x="181" y="155" font-family="'Oswald',Impact,sans-serif" font-size="30" font-weight="700"
-                fill="none" stroke="white" stroke-width="2" text-anchor="start" letter-spacing="3">U</text>
-            </svg>
-          </div>
+        <!-- HASHIMURA UNSOU ブランドロゴ（インラインSVG） -->
+        <div class="footer__brand-logo" aria-label="HASHIMURA UNSOU ブランドロゴ">
+          <svg class="hu-logo" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- ===== ライン1: HASHIMURA ===== -->
+            <text x="150" y="40"
+                  font-family="'Oswald', Impact, sans-serif"
+                  font-size="32" font-weight="600"
+                  fill="none" stroke="currentColor" stroke-width="1.2"
+                  stroke-linejoin="round"
+                  text-anchor="middle" letter-spacing="5">HASHIMURA</text>
+
+            <!-- ===== ライン2: UNS ===== -->
+            <text x="86" y="80"
+                  font-family="'Oswald', Impact, sans-serif"
+                  font-size="32" font-weight="600"
+                  fill="none" stroke="currentColor" stroke-width="1.2"
+                  stroke-linejoin="round"
+                  text-anchor="start" letter-spacing="5">UNS</text>
+
+            <!-- ===== ギアアイコン（O替わり） ===== -->
+            <!-- ギア中心: x≈176, y≈67 -->
+            <g transform="translate(176, 66)">
+              <!-- 外輪 -->
+              <circle r="13" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <!-- 内ハブ -->
+              <circle r="5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+              <!-- 8本の歯（4方向＋45度） -->
+              <rect x="-2.2" y="-18.5" width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+              <rect x="-2.2" y="13"    width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+              <rect x="-18.5" y="-2.2" width="5.5" height="4.5" rx="1.2" fill="currentColor"/>
+              <rect x="13"    y="-2.2" width="5.5" height="4.5" rx="1.2" fill="currentColor"/>
+              <!-- 対角の歯（rotate） -->
+              <rect transform="rotate(45)"   x="-2.2" y="-18.5" width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+              <rect transform="rotate(135)"  x="-2.2" y="-18.5" width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+              <rect transform="rotate(-45)"  x="-2.2" y="-18.5" width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+              <rect transform="rotate(-135)" x="-2.2" y="-18.5" width="4.5" height="5.5" rx="1.2" fill="currentColor"/>
+            </g>
+
+            <!-- ===== ライン2: U（ギアの後） ===== -->
+            <text x="198" y="80"
+                  font-family="'Oswald', Impact, sans-serif"
+                  font-size="32" font-weight="600"
+                  fill="none" stroke="currentColor" stroke-width="1.2"
+                  stroke-linejoin="round"
+                  text-anchor="start" letter-spacing="5">U</text>
+
+          </svg>
         </div>
       </div>
       <div>
@@ -598,7 +627,7 @@
     </div>
     <div class="footer__bottom">
       <p>© 2025–2026 有限会社橋村運送 All Rights Reserved.</p>
-      <p>制作：YOHAKU Lab.</p>
+      <p>制作：ソルエイト株式会社</p>
     </div>
   </div>
 </footer>

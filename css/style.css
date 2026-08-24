@@ -1,6 +1,6 @@
 /* ============================================================
    有限会社橋村運送 公式サイト — メインスタイルシート
-   制作: YOHAKU Lab. / 山口 剛
+   制作: ソルエイト株式会社
    最終更新: 2025-04
    ============================================================ */
 
@@ -1393,6 +1393,15 @@ ul { list-style: none; }
   color: #721C24;
   border: 1px solid #F5C6CB;
 }
+/* 案内表示（メール送信フォールバック時） */
+.form-status--info {
+  background: var(--blue-light);
+  color: var(--blue-deeper);
+  border: 1px solid #BBD8F2;
+  line-height: 1.8;
+}
+.form-status--info a { color: var(--blue-primary); text-decoration: underline; }
+.form-status small { display: block; margin-top: 8px; font-weight: 500; }
 .form-note {
   font-size: 11px;
   color: var(--slate-mid);

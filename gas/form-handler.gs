@@ -131,7 +131,6 @@ ${data.message || '（未入力）'}
 ━━━━━━━━━━━━━━━━━━━━
 このメールは有限会社橋村運送公式サイトの
 お問い合わせフォームから自動送信されています。
-制作: YOHAKU Lab. / 山口 剛
   `.trim();
 
   GmailApp.sendEmail(SETTINGS.NOTIFY_EMAIL, subject, body, {

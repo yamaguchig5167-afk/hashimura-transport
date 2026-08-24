@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="有限会社橋村運送">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B5CAD"/>
+      <stop offset="100%" stop-color="#052D57"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#bg)"/>
+  <!-- H マーク（Hashimura） -->
+  <path d="M18 15h7v14h14V15h7v29h-7V36H25v8h-7z" fill="#FFFFFF"/>
+  <!-- ゴールドの下線（アクセントカラー） -->
+  <rect x="18" y="49" width="28" height="4" rx="2" fill="#C8A84B"/>
+</svg>

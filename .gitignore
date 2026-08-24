@@ -13,3 +13,8 @@ node_modules/
 # 環境変数・機密ファイル
 .env
 *.env.local
+
+# AI開発ツールのローカル設定（許可リスト・APIキーを含みうるため追跡しない）
+.claude/settings.local.json
+.mcp.json
+.codex/config.toml
