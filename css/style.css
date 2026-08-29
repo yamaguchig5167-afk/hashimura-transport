@@ -14,7 +14,9 @@
   --blue-mid:     #1A6FCC;
   --white:        #FFFFFF;
   --slate-dark:   #1E2A36;
-  --slate-mid:    #6B7C8F;
+  /* サブテキスト色。旧 #6B7C8F は白背景でコントラスト比4.28、薄いグレー背景で4.02と
+     WCAG AA（4.5:1）を下回っていたため、色味は保ったまま明度のみ下げた（白5.48 / #F5F8FB 5.14）*/
+  --slate-mid:    #5A6B7D;
   --slate-light:  #B8C5D0;
   --bg-light:     #F5F8FB;
   --accent-gold:  #C8A84B;
@@ -2180,4 +2182,186 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 @media (max-width: 600px) {
   .back-to-top { bottom: 76px; right: 14px; width: 44px; height: 44px; }
+}
+
+/* ============================================================
+   スマートフォンでの可読性対策（2026-08-29 監査により追加）
+
+   375px幅の実機相当で全ページの文字を実測したところ、
+   ①9〜12pxの文字が多数あり日本語では潰れて読めない
+   ②ヒーローの文字が背景写真の明るい部分に重なり、
+     金色文字で最小1.21:1までコントラストが落ちる
+   という2点が確認されたため、以下で対処している。
+
+   このブロックはファイル末尾に置くことで既存指定を上書きする。
+   数値を変える場合は、実機幅375pxでの再測定を必ず行うこと。
+   ============================================================ */
+
+/* ===== ヒーロー：背景写真の上でも確実に読めるようにする ===== */
+
+/* バッジは半透明のままだと背景写真の明暗で可読性が変わるため、
+   不透明なネイビーを敷いてコントラストを固定する（金色文字で5.0:1） */
+.hero__badge {
+  background: #143A63;
+  border-color: rgba(200, 168, 75, 0.55);
+}
+.hero__badge--secondary {
+  background: #1B2E44;
+  border-color: rgba(255, 255, 255, 0.38);
+  color: #FFFFFF;
+}
+.hero__badge--g {
+  background: #143A63;
+  border-color: rgba(200, 168, 75, 0.7);
+}
+/* ヒーロー内の白抜きボタンも同様に下地を固定する */
+.hero .btn--outline {
+  background: rgba(5, 45, 87, 0.62);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+/* 見出しは写真の白いトラックに重なることがあるため、影で輪郭を確保する */
+.hero__headline,
+.hero__sub,
+.hero__scroll-hint {
+  text-shadow: 0 1px 3px rgba(5, 45, 87, 0.9), 0 2px 14px rgba(5, 45, 87, 0.7);
+}
+/* 見出し2行目の金色。標準の #C8A84B は明るい車体に重なると
+   コントラスト比2.49まで落ちるため、ヒーロー内だけ明るい金にする（最悪でも3.46）*/
+.hero__headline em {
+  color: #E0C87F;
+}
+/* 各事業部ページのヒーローも背景が写真になったため、明るい色に振る。
+   標準の金 #C8A84B だと12pxで2.69〜3.47:1しか取れない。
+   説明文とバッジも不透明度を上げて写真の明部に負けないようにする。 */
+body .page-hero__label {
+  color: #EFE0B4;
+}
+body .page-hero__desc {
+  color: rgba(255, 255, 255, 0.94);
+}
+body .page-hero__group-badge {
+  color: rgba(255, 255, 255, 0.94);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* パンくずリストは <ol> だが list-style が未指定のため、
+   ブラウザ既定の「1. 2. 3.」が項目名に重なって表示されていた（全ページ）*/
+body .breadcrumb__list,
+body .breadcrumb__list li {
+  list-style: none;
+}
+/* 文字が乗る範囲だけに暗いスクリムを敷く。
+   写真全体を暗くせずにコントラストを確保するための措置。
+   （.hero__content は z-index:10 で重ね順の基準になっているため、
+     ::before を z-index:-1 に置くと文字の背後・写真の手前に入る）*/
+.hero__content::before {
+  content: '';
+  position: absolute;
+  top: -32px;
+  bottom: -32px;
+  left: 0;
+  right: 18%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg,
+    rgba(5, 45, 87, 0.70) 0%,
+    rgba(5, 45, 87, 0.58) 55%,
+    rgba(5, 45, 87, 0) 100%);
+}
+
+@media (max-width: 600px) {
+  /* 縦長の画面では文字が写真の明るい部分に重なりやすいので、
+     オーバーレイを濃くし、上下にも暗いスクリムを重ねる */
+  .hero__bg {
+    background-image:
+      linear-gradient(180deg, rgba(5,45,87,0.55) 0%, rgba(5,45,87,0.18) 38%, rgba(5,45,87,0.72) 100%),
+      linear-gradient(105deg, rgba(5,45,87,0.95) 0%, rgba(8,64,122,0.92) 42%, rgba(11,92,173,0.82) 100%),
+      url('../images/hero-fleet.jpg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center 48%;
+  }
+  /* 見出しが20pxだと主役として弱く、日本語も詰まって見えるため引き上げる */
+  .hero__headline { font-size: 24px; line-height: 1.55; }
+}
+
+/* ===== 本文の文字サイズ（日本語は12px以下だと実機で潰れる） =====
+
+   セレクタに body を付けているのは詳細度を上げるため。
+   各ページの <head> 内 <style> はこの外部CSSより後に読み込まれるので、
+   単一クラスのままだとページ側の指定に負けて効かない。 */
+@media (max-width: 600px) {
+  body .section__desc            { font-size: 15px; line-height: 1.85; }
+  body .fleet-section__lead      { font-size: 14.5px; line-height: 1.85; }
+  body .group-section__lead      { font-size: 15px; line-height: 1.85; }
+  body .service-card__desc       { font-size: 14px; line-height: 1.8; }
+  body .strength-item__desc      { font-size: 14px; line-height: 1.8; }
+  body .safety-card__desc        { font-size: 13.5px; line-height: 1.8; }
+  body .branch-card__info        { font-size: 14px; line-height: 1.9; }
+  body .contact__note            { font-size: 14px; line-height: 1.85; }
+  body .fleet-photo__caption     { font-size: 13.5px; line-height: 1.8; }
+  body .info-table th            { font-size: 13px; }
+  body .info-table td            { font-size: 14px; line-height: 1.8; }
+  body .company-table th         { font-size: 13px; }
+  body .company-table td         { font-size: 14px; line-height: 1.85; }
+  body .contact__note small,
+  body .branch-card__info small,
+  body .company-table small,
+  body .btn-tel-large small      { font-size: 12px; }
+  body .form-note                { font-size: 12.5px; line-height: 1.8; }
+  body .contact__tel-label       { font-size: 13px; }
+  body .contact__tel-fax         { font-size: 13px; }
+  body .contact__email-label     { font-size: 13px; }
+  body .footer__contact-item     { font-size: 13px; line-height: 1.85; }
+  body .footer__nav-links a      { font-size: 13.5px; }
+  body .footer__tagline          { font-size: 13px; line-height: 1.85; }
+
+  /* 採用ページ：求職者が最も読み込む文章なので特に下げない */
+  body .benefit-item__desc       { font-size: 13.5px; line-height: 1.8; }
+  body .flow-step__desc          { font-size: 13.5px; line-height: 1.8; }
+  body .job-card__header-note    { font-size: 13px; }
+  body .inquiry-note             { font-size: 12.5px; }
+  body .job-card__desc           { font-size: 14px; line-height: 1.8; }
+  body .recruit-cta__desc        { font-size: 14.5px; line-height: 1.85; }
+
+  /* 事業部ページ */
+  body .work-card__desc          { font-size: 14px; line-height: 1.8; }
+  body .work-point               { font-size: 13.5px; line-height: 1.7; }
+  body .service-feature__desc    { font-size: 14.5px; line-height: 1.85; }
+  body .service-point            { font-size: 14px; }
+  body .flow-item__desc          { font-size: 12.5px; line-height: 1.7; }
+  body .flow-item__name          { font-size: 13.5px; }
+  body .page-hero__desc          { font-size: 14.5px; line-height: 1.9; }
+  body .page-cta__desc           { font-size: 14.5px; line-height: 1.85; }
+  body .service-photo__caption,
+  body .work-photo__caption      { font-size: 13.5px; line-height: 1.8; }
+  body .feature-item__desc       { font-size: 13.5px; line-height: 1.8; }
+  body .group-banner__name       { font-size: 13.5px; }
+}
+
+/* ===== ラベル・バッジ類（装飾寄りだが9pxは小さすぎる） ===== */
+@media (max-width: 600px) {
+  body .logo__en                 { font-size: 10px; }
+  body .footer__brand .logo__en  { font-size: 11px; }
+  body .stat__label              { font-size: 11px; }
+  body .strengths__badge-label   { font-size: 11px; }
+  body .g-mark-banner__label     { font-size: 11.5px; }
+  body .section__label           { font-size: 11.5px; }
+  body .hero__badge              { font-size: 12px; }
+  body .group-card__tag          { font-size: 12px; }
+  body .branch-card__badge       { font-size: 12px; }
+  body .job-card__badge          { font-size: 12px; }
+  body .footer__nav-title        { font-size: 12px; }
+  body .footer__contact-label    { font-size: 12px; }
+  body .form-label__required     { font-size: 11px; }
+  body .page-hero__label         { font-size: 12px; }
+  body .page-hero__group-badge   { font-size: 12px; }
+  body .breadcrumb__list         { font-size: 12.5px; }
+  body .service-feature__num     { font-size: 11.5px; }
+  body .work-card__num           { font-size: 11px; }
+  body .company-info-card__en    { font-size: 12.5px; }
+  body .group-banner__label      { font-size: 12px; }
+  body .footer__bottom p         { font-size: 12.5px; }
+  body .contact__email-link      { font-size: 14px; }
+  body .news-badge               { font-size: 12px; }
+  body .sidebar-widget__title    { font-size: 12px; }
 }

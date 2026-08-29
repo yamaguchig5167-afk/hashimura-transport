@@ -39,8 +39,10 @@
 /* ページヒーロー（出荷ヤードでの積載風景を背景に使用） */
 .page-hero {
   background-color: #2d5a30;
+  /* 背景写真に青空が入り緑のオーバーレイでは明るくなりすぎるため、
+     ネイビー側のヒーローより濃いめに敷いている（実測で白文字7.0:1を確保）*/
   background-image:
-    linear-gradient(135deg, rgba(28,58,30,0.92) 0%, rgba(45,90,48,0.84) 50%, rgba(58,122,61,0.74) 100%),
+    linear-gradient(135deg, rgba(20,42,22,0.95) 0%, rgba(28,58,30,0.92) 50%, rgba(40,80,42,0.90) 100%),
     url('images/yard-poles.jpg');
   background-size: cover;
   background-position: center 65%;
