@@ -2250,6 +2250,16 @@ body .breadcrumb__list,
 body .breadcrumb__list li {
   list-style: none;
 }
+
+/* 「九州／全域対応」バッジは絶対配置でカード右上に重ねているが、
+   スマホでは引用文の1行目に42×34px重なり文字が読めなくなっていた。
+   横幅に余裕がないので、重ねずに文章の上へ通常配置する。 */
+@media (max-width: 600px) {
+  body .strengths__visual-card .strengths__badge {
+    position: static;
+    margin: 0 0 18px auto;
+  }
+}
 /* 文字が乗る範囲だけに暗いスクリムを敷く。
    写真全体を暗くせずにコントラストを確保するための措置。
    （.hero__content は z-index:10 で重ね順の基準になっているため、
