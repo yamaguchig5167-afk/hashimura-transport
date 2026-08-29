@@ -74,6 +74,24 @@ ul { list-style: none; }
 .section--dark {
   background: var(--slate-dark);
 }
+/* 安全セクション：安全教育の様子を背景に敷く
+   個人が特定できないよう強くぼかしたうえ、低不透明度で重ねている */
+#safety {
+  position: relative;
+  overflow: hidden;
+}
+#safety::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/safety-bg.jpg') center 35% / cover no-repeat;
+  opacity: 0.14;
+  pointer-events: none;
+}
+#safety > .container {
+  position: relative;
+  z-index: 1;
+}
 .section--light {
   background: var(--bg-light);
 }
@@ -407,28 +425,28 @@ ul { list-style: none; }
   /* コンテンツを統計バーに被らないよう上寄りに */
   padding-bottom: 80px;
 }
-/* 背景（写真差し替え時はbg-imageを変更） */
+/* 背景（実車両写真＋ネイビーグラデーションのオーバーレイ）
+   写真を差し替える場合は images/hero-fleet.jpg を同名で上書きする */
 .hero__bg {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(135deg,
-      var(--blue-deeper) 0%,
-      var(--blue-dark) 40%,
-      var(--blue-primary) 75%,
-      #1A6FCC 100%
-    );
-}
-/* 写真を使う場合はここを変更：
-.hero__bg {
+  background-color: var(--blue-deeper); /* 画像読込前・読込失敗時の下地 */
   background-image:
-    linear-gradient(135deg, rgba(5,45,87,0.88) 0%, rgba(11,92,173,0.72) 100%),
-    url('../images/hero-bg.jpg');
+    linear-gradient(105deg,
+      rgba(5, 45, 87, 0.94) 0%,
+      rgba(8, 64, 122, 0.86) 42%,
+      rgba(11, 92, 173, 0.58) 100%
+    ),
+    url('../images/hero-fleet.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center 42%;
+  background-repeat: no-repeat;
 }
-*/
-/* グリッドパターン（控えめに） */
+/* 写真を使わず無地グラデーションに戻す場合は、上の background-image を
+   linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue-dark) 40%,
+   var(--blue-primary) 75%, #1A6FCC 100%) の1本だけに差し替える */
+
+/* グリッドパターン（写真の上に重なるため控えめに） */
 .hero__bg::before {
   content: '';
   position: absolute;
@@ -437,35 +455,10 @@ ul { list-style: none; }
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 80px 80px;
-  opacity: 0.5;
+  opacity: 0.28;
 }
 /* ゴールドラインは統計バー側へ移動 */
 .hero__bg::after { content: none; }
-/* トラック写真（ヒーロー右側 / mix-blend-mode:multiplyで白背景を透過） */
-.hero__truck {
-  position: absolute;
-  right: -2%;
-  bottom: 76px; /* 統計バー分だけ上にずらす */
-  width: 58%;
-  max-width: 860px;
-  /* 白背景を透過しヒーロー背景と馴染ませる */
-  mix-blend-mode: multiply;
-  opacity: 0;
-  /* 左端・下端をグラデーションマスクで自然にフェード */
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0%, black 8%),
-    linear-gradient(to top,   transparent 0%, black 10%);
-  mask-image:
-    linear-gradient(to right, transparent 0%, black 8%),
-    linear-gradient(to top,   transparent 0%, black 10%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-  animation: slideInTruck 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards;
-}
-@keyframes slideInTruck {
-  from { transform: translateX(40px); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
-}
 /* コンテンツ */
 .hero__content {
   position: relative;
@@ -1517,7 +1510,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
   /* ヒーロー */
   .hero__content { padding: 0 24px; }
-  .hero__truck { width: 75%; bottom: 70px; right: -4%; }
 
   /* 統計バー：横スクロール表示（非表示→表示に変更） */
   .hero__stats {
@@ -1898,65 +1890,36 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   margin-top: 14px;
 }
 
-/* ===== トラック写真ステージ ===== */
-.fleet-truck-stage {
-  position: relative;
-  width: 100%;
+/* ===== 実車両の写真（2枚組） ===== */
+.fleet-photos {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  padding: 40px 0 0;
+}
+.fleet-photo {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
   overflow: hidden;
-  margin-top: 44px;
-  /* 空→白→薄いグレー地面 のグラデーション */
-  background: linear-gradient(
-    180deg,
-    #dff0fa 0%,
-    #eef8fd 28%,
-    #ffffff 52%,
-    #f2f2f2 52%,
-    #e4e4e4 100%
-  );
-  /* ブルーラインを底面アクセントに */
-  border-bottom: 5px solid var(--blue-primary);
-  text-align: center;
-  padding: 48px 24px 0;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
-/* トラック写真本体 */
-.fleet-truck-photo {
-  display: inline-block;
-  max-width: 1040px;
-  width: 88%;
-  height: auto;
-  position: relative;
-  z-index: 2;
-  /* 白背景のPNGが白→透明に自然に溶け込む */
-  mix-blend-mode: multiply;
-  /* 立体的な影 */
-  filter:
-    drop-shadow(0 18px 36px rgba(11, 92, 173, 0.14))
-    drop-shadow(0  4px  8px rgba(0, 0, 0, 0.10));
-}
-/* ブランドタグ（右下コーナー） */
-.fleet-brand-tag {
-  position: absolute;
-  right: 5%;
-  bottom: 12px;
-  text-align: right;
-  pointer-events: none;
-}
-.fleet-brand-tag__label {
+.fleet-photo:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.fleet-photo img {
   display: block;
-  font-family: var(--font-en);
-  font-size: clamp(15px, 1.8vw, 22px);
-  font-weight: 700;
-  color: var(--blue-primary);
-  letter-spacing: 0.08em;
-  opacity: 0.75;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: center 55%;
 }
-.fleet-brand-tag__sub {
-  display: block;
-  font-family: var(--font-jp-serif);
-  font-size: clamp(10px, 1vw, 12px);
+.fleet-photo__caption {
+  padding: 14px 18px 16px;
+  font-size: 13px;
+  line-height: 1.7;
   color: var(--slate-mid);
-  letter-spacing: 0.06em;
-  margin-top: 3px;
+  border-top: 3px solid var(--accent-gold);
 }
 
 /* ===== 車両タイプカード ===== */
@@ -2157,7 +2120,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* ===== レスポンシブ ===== */
 @media (max-width: 900px) {
   .fleet-section { padding: 64px 0 0; }
-  .fleet-truck-photo { width: 95%; }
+  .fleet-photos { grid-template-columns: 1fr; gap: 20px; padding-top: 32px; }
+  .fleet-photo img { height: 260px; }
 }
 @media (max-width: 700px) {
   .group-cards { grid-template-columns: 1fr; gap: 20px; }
@@ -2166,9 +2130,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 @media (max-width: 600px) {
   .fleet-section { padding: 56px 0 0; }
-  .fleet-truck-stage { padding: 32px 16px 0; }
-  .fleet-truck-photo { width: 100%; }
-  .fleet-brand-tag { display: none; }
+  .fleet-photo img { height: 210px; }
+  .fleet-photo__caption { font-size: 12.5px; padding: 12px 15px 14px; }
   .truck-types { grid-template-columns: 1fr; gap: 16px; padding: 32px 0 56px; }
   .truck-type-card { padding: 20px 18px; gap: 16px; }
   .truck-type-card__icon { width: 44px; height: 44px; border-radius: 11px; }

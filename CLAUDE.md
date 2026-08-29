@@ -32,11 +32,12 @@ hashimura-transport/
 │   └── main.js            # メインJavaScript
 ├── gas/
 │   └── form-handler.gs    # Google Apps Script（フォーム送信処理）
-├── images/
-│   ├── favicon.svg        # ファビコン
-│   ├── ogp.png            # OGP画像（1200×630）
-│   ├── truck-unic.png     # ユニック車イラスト
-│   └── README.md          # 画像差し替えガイド
+├── favicon.ico            # ファビコン
+├── images/                # 実車両写真一式（詳細は images/README.md）
+│   ├── favicon.svg / ogp.jpg
+│   ├── hero-fleet.jpg / pilot-car.jpg / yard-poles.jpg
+│   ├── fleet-lineup.jpg / fleet-unic.jpg / safety-bg.jpg
+│   └── README.md          # 画像ガイド
 └── .github/
     └── workflows/
         └── deploy.yml     # GitHub Pages 自動デプロイ
@@ -121,10 +122,12 @@ hashimura-transport/
   GAS未設定時は `openMailFallback()` でメール作成画面を開き、その旨を正直に案内する
 
 ### 画像
-- `images/` フォルダに配置
-- ヒーロー画像: `hero-bg.jpg` （1920×1080px 推奨）
-- OGP画像: `ogp.jpg` （1200×630px 推奨）
+- `images/` フォルダに配置。詳細と注意事項は `images/README.md` が正
 - alt テキストは必ず日本語で記述する
+- 公開前に必ず EXIF を削除する（`magick ... -strip`）
+- **車体に「物流ハシムラ」が明瞭に読める写真は使わない**（事業部表記に統一しているため）
+- **従業員の顔が判別できる写真は、本人の同意が確認できるまで使わない**
+- 取引先の社名・ロゴの写り込みがないか確認する
 
 ---
 

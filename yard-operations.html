@@ -7,7 +7,7 @@
 <!-- ファビコン・テーマカラー -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-<link rel="apple-touch-icon" href="images/ogp.png">
+<link rel="apple-touch-icon" href="images/ogp.jpg">
 <meta name="theme-color" content="#0B5CAD">
 
 <!-- SEO -->
@@ -21,7 +21,7 @@
 <meta property="og:url"         content="https://yamaguchig5167-afk.github.io/hashimura-transport/yard-operations.html">
 <meta property="og:title"       content="出荷ヤード作業事業部｜有限会社橋村運送 コンクリートポールの在庫管理・荷積み">
 <meta property="og:description" content="電力関連コンクリートポールの出荷ヤード作業・在庫管理・荷積みを担う、有限会社橋村運送の専門事業部。">
-<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png">
+<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg">
 <meta property="og:locale"      content="ja_JP">
 <meta property="og:site_name"   content="有限会社橋村運送">
 
@@ -36,9 +36,14 @@
 <style>
 /* ===== yard-operations.html 固有スタイル ===== */
 
-/* ページヒーロー */
+/* ページヒーロー（出荷ヤードでの積載風景を背景に使用） */
 .page-hero {
-  background: linear-gradient(135deg, #1c3a1e 0%, #2d5a30 50%, #3a7a3d 100%);
+  background-color: #2d5a30;
+  background-image:
+    linear-gradient(135deg, rgba(28,58,30,0.92) 0%, rgba(45,90,48,0.84) 50%, rgba(58,122,61,0.74) 100%),
+    url('images/yard-poles.jpg');
+  background-size: cover;
+  background-position: center 65%;
   padding: calc(var(--header-height) + 64px) 24px 80px;
   text-align: center;
   position: relative;
@@ -208,6 +213,25 @@
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 6px;
+}
+
+/* ヤード作業の写真 */
+.work-photo {
+  margin: 48px auto 0;
+  max-width: 620px;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.work-photo img { display: block; width: 100%; height: auto; }
+.work-photo__caption {
+  padding: 14px 18px 16px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--slate-mid);
+  border-top: 3px solid var(--accent-gold);
 }
 
 /* フローセクション（作業の流れ） */
@@ -529,6 +553,13 @@
         確実な在庫管理と丁寧なヤード作業で、輸送の起点を支えます。
       </p>
     </div>
+    <figure class="work-photo fade-in">
+      <img src="images/yard-poles.jpg" width="780" height="750" loading="lazy"
+           alt="出荷ヤードでコンクリートポールを積載した車両。規格別に整えられたポールが並ぶ">
+      <figcaption class="work-photo__caption">
+        規格別に仕分けしたコンクリートポールを、出荷順に積み込みます。
+      </figcaption>
+    </figure>
     <div class="work-cards">
       <!-- 在庫管理 -->
       <article class="work-card fade-in fade-in--delay-1">
@@ -701,8 +732,8 @@
 <section class="section" aria-labelledby="company-title">
   <div class="container">
     <div class="fade-in">
-      <p class="section__label">Company Profile</p>
-      <h2 id="company-title" class="section__title">会社概要</h2>
+      <p class="section__label">Division Profile</p>
+      <h2 id="company-title" class="section__title">事業部概要</h2>
     </div>
     <div style="max-width:720px; margin:48px auto 0;">
       <div class="company-info-card fade-in">

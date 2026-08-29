@@ -7,7 +7,7 @@
 <!-- ファビコン・テーマカラー -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-<link rel="apple-touch-icon" href="images/ogp.png">
+<link rel="apple-touch-icon" href="images/ogp.jpg">
 <meta name="theme-color" content="#0B5CAD">
 
 <!-- SEO基本メタタグ -->
@@ -23,7 +23,7 @@
 <meta property="og:url"         content="https://yamaguchig5167-afk.github.io/hashimura-transport/">
 <meta property="og:title"       content="有限会社橋村運送｜熊本の電力インフラ資材輸送・電柱輸送">
 <meta property="og:description" content="電柱輸送をはじめとする電力関連・建設資材輸送を行う熊本の運送会社。安全・確実・丁寧な輸送で地域インフラを支えます。">
-<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png">
+<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg">
 <meta property="og:locale"      content="ja_JP">
 <meta property="og:site_name"   content="有限会社橋村運送">
 
@@ -31,7 +31,7 @@
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="有限会社橋村運送｜熊本の電力インフラ資材輸送">
 <meta name="twitter:description" content="電柱輸送をはじめとする電力関連・建設資材輸送を行う熊本の運送会社。">
-<meta name="twitter:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png">
+<meta name="twitter:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg">
 
 <!-- 構造化データ（LocalBusiness） -->
 <script type="application/ld+json">
@@ -42,7 +42,7 @@
   "alternateName": "Hashimura Transport Co., Ltd.",
   "url": "https://yamaguchig5167-afk.github.io/hashimura-transport/",
   "logo": "https://yamaguchig5167-afk.github.io/hashimura-transport/images/site-logo.svg",
-  "image": "https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png",
+  "image": "https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg",
   "description": "電柱輸送をはじめとする電力関連・建設資材輸送を行う熊本の運送会社",
   "address": {
     "@type": "PostalAddress",
@@ -171,16 +171,6 @@
   <!-- 背景 -->
   <div class="hero__bg" aria-hidden="true"></div>
 
-  <!-- トラック写真（右側に表示） -->
-  <img
-    src="images/truck-unic.png"
-    alt=""
-    class="hero__truck"
-    aria-hidden="true"
-    loading="eager"
-    onerror="this.style.display='none';"
-  >
-
   <div class="hero__content">
     <div class="hero__badges">
       <span class="hero__badge">電力インフラ資材輸送</span>
@@ -302,18 +292,23 @@
     </div>
   </div>
 
-  <!-- トラック写真ステージ（truck-unic.png があれば表示、なければ非表示） -->
-  <div class="fleet-truck-stage" id="fleet-truck-stage">
-    <img
-      src="images/truck-unic.png"
-      alt="橋村運送のユニック車 — 電力インフラ資材輸送に特化した専用車両"
-      class="fleet-truck-photo"
-      loading="lazy"
-      onerror="document.getElementById('fleet-truck-stage').style.display='none';"
-    >
-    <div class="fleet-brand-tag" aria-hidden="true">
-      <span class="fleet-brand-tag__label">HASHIMURA TRANSPORT</span>
-      <span class="fleet-brand-tag__sub">有限会社橋村運送</span>
+  <!-- 実車両の写真 -->
+  <div class="container">
+    <div class="fleet-photos fade-in">
+      <figure class="fleet-photo">
+        <img src="images/fleet-lineup.jpg" width="870" height="520" loading="lazy"
+             alt="出庫を待つ橋村運送の車両群。クレーンを搭載した平ボディ車が並ぶ">
+        <figcaption class="fleet-photo__caption">
+          出庫前の車両。九州全域の現場へ、今日も走ります。
+        </figcaption>
+      </figure>
+      <figure class="fleet-photo">
+        <img src="images/fleet-unic.jpg" width="870" height="700" loading="lazy"
+             alt="コンクリートポールを積載した橋村運送のユニック車（クレーン付平ボディ車）">
+        <figcaption class="fleet-photo__caption">
+          クレーン付ユニック車。現場での積み降ろしまで一貫して対応します。
+        </figcaption>
+      </figure>
     </div>
   </div>
 

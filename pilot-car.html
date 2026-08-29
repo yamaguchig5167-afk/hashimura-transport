@@ -7,7 +7,7 @@
 <!-- ファビコン・テーマカラー -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-<link rel="apple-touch-icon" href="images/ogp.png">
+<link rel="apple-touch-icon" href="images/ogp.jpg">
 <meta name="theme-color" content="#0B5CAD">
 
 <!-- SEO -->
@@ -21,7 +21,7 @@
 <meta property="og:url"         content="https://yamaguchig5167-afk.github.io/hashimura-transport/pilot-car.html">
 <meta property="og:title"       content="先導車事業部｜有限会社橋村運送 特殊車両の先導車サービス">
 <meta property="og:description" content="コンクリートポール・電力関連資材を積載した特殊車両の先導車サービスを担う、有限会社橋村運送の専門事業部。">
-<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.png">
+<meta property="og:image"       content="https://yamaguchig5167-afk.github.io/hashimura-transport/images/ogp.jpg">
 <meta property="og:locale"      content="ja_JP">
 <meta property="og:site_name"   content="有限会社橋村運送">
 
@@ -36,9 +36,14 @@
 <style>
 /* ===== pilot-car.html 固有スタイル ===== */
 
-/* ページヒーロー */
+/* ページヒーロー（実際の誘導車＋電柱積載車の写真を背景に使用） */
 .page-hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background-color: #16213e;
+  background-image:
+    linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(22,33,62,0.84) 50%, rgba(15,52,96,0.74) 100%),
+    url('images/pilot-car.jpg');
+  background-size: cover;
+  background-position: center 60%;
   padding: calc(var(--header-height) + 64px) 24px 80px;
   text-align: center;
   position: relative;
@@ -167,6 +172,27 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+/* サービス写真 */
+.service-photo {
+  margin: 32px 0 0;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.service-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.service-photo__caption {
+  padding: 14px 18px 16px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--slate-mid);
+  border-top: 3px solid var(--accent-gold);
 }
 .service-point {
   display: flex;
@@ -429,6 +455,14 @@
           <li class="service-point">当社輸送部門の車両との一体運行で安全確保</li>
         </ul>
       </div>
+      <figure class="service-photo">
+        <img src="images/pilot-car.jpg" width="1280" height="900" loading="lazy"
+             alt="電柱を積載したトラックの隣に待機する誘導車。橋村運送の先導車事業部の車両">
+        <figcaption class="service-photo__caption">
+          電柱を積載した輸送車と、その前方を走る誘導車。<br>
+          2台1組で現場までの安全な運行を確保します。
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

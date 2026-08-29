@@ -36,11 +36,12 @@ hashimura-transport/
 ├── css/style.css              ← スタイルシート（全ページ共通）
 ├── js/main.js                 ← JavaScript（フォーム送信・アニメーション）
 ├── gas/form-handler.gs        ← Google Apps Script（フォーム→メール）
-├── images/
-│   ├── favicon.svg            ← ファビコン
-│   ├── ogp.png                ← OGP画像（1200×630）
-│   ├── truck-unic.png         ← ユニック車イラスト
-│   └── README.md              ← 画像差し替えガイド
+├── favicon.ico                ← ファビコン（ブラウザ既定の要求先）
+├── images/                    ← 実車両写真一式。詳細は images/README.md
+│   ├── favicon.svg  ogp.jpg
+│   ├── hero-fleet.jpg  pilot-car.jpg  yard-poles.jpg
+│   ├── fleet-lineup.jpg  fleet-unic.jpg  safety-bg.jpg
+│   └── README.md              ← 画像ガイド（社名の写り込み等の注意あり）
 └── .github/workflows/deploy.yml ← GitHub Pages 自動デプロイ
 ```
 
