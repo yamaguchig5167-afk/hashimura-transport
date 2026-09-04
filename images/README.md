@@ -13,6 +13,15 @@
 | `fleet-unic.jpg` | 870×700 | トップページ 保有車両セクション（右）|
 | `safety-bg.jpg` | 1100×594 | 安全への取り組みセクションの背景（ぼかし＋不透明度14%）|
 | `gallery-01〜08.jpg` | 幅900 | トップページ「現場のいま」のカルーセル（8枚）|
+| `svc-large.jpg` | 900×486 | 事業内容 SERVICE 04／保有車両「平ボディ車（大型）」|
+| `svc-medium.jpg` | 900×517 | 事業内容 保有車両「平ボディ車（中型）」|
+
+事業内容ページ（services.html）では、上記のほか
+`fleet-lineup.jpg`（ヒーロー背景）、`yard-poles.jpg`（SERVICE 01）、
+`gallery-04.jpg`（SERVICE 02）、`gallery-01.jpg`（SERVICE 03）、
+`gallery-06.jpg`（保有車両ユニック車）を再利用している。
+同じファイルを使い回すことで表示が速くなるため、差し替え時は
+どのページから参照されているか `grep` で確認すること。
 | `ogp.jpg` | 1200×630 | OGP画像（SNSシェア時のサムネイル）|
 | `favicon.svg` | SVG | ファビコン（`favicon.ico` はルートに配置）|
 

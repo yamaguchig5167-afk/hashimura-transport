@@ -36,9 +36,14 @@
 <style>
 /* ===== services.html 固有スタイル ===== */
 
-/* ページヒーロー */
+/* ページヒーロー（保有車両の写真を背景に使用） */
 .page-hero {
-  background: linear-gradient(135deg, var(--blue-deeper) 0%, var(--blue-dark) 50%, var(--blue-primary) 100%);
+  background-color: var(--blue-dark);
+  background-image:
+    linear-gradient(135deg, rgba(5,45,87,0.93) 0%, rgba(8,64,122,0.88) 50%, rgba(11,92,173,0.78) 100%),
+    url('images/fleet-lineup.jpg');
+  background-size: cover;
+  background-position: center 58%;
   padding: calc(var(--header-height) + 64px) 24px 72px;
   text-align: center;
   position: relative;
@@ -122,32 +127,30 @@
 .service-detail:nth-child(even) { direction: rtl; }
 .service-detail:nth-child(even) > * { direction: ltr; }
 
+/* 実際の車両写真を敷き、アイコンは左下に小さく重ねる */
 .service-detail__visual {
-  background: linear-gradient(135deg, var(--blue-light) 0%, #d8ecf9 100%);
+  background: var(--blue-light);
   border-radius: 16px;
   aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
-.service-detail__visual::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 100px;
-  height: 100px;
-  background: var(--blue-primary);
-  opacity: 0.08;
-  border-radius: 50%;
+.service-detail__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
 }
 .service-detail__icon-wrap {
-  width: 80px;
-  height: 80px;
-  background: var(--white);
-  border-radius: 20px;
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,7 +229,8 @@
   background: var(--white);
   border: 1.5px solid var(--border-light);
   border-radius: 16px;
-  padding: 32px 28px;
+  padding: 0 0 26px;
+  overflow: hidden;
   text-align: center;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
@@ -236,11 +240,24 @@
   transform: translateY(-4px);
   border-color: var(--blue-primary);
 }
+/* 実車両の写真 */
+.vehicle-card__photo {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center 55%;
+  margin-bottom: 22px;
+  background: var(--bg-light);
+}
+/* 写真のないカード（Gマーク）はアイコンで揃える */
 .vehicle-card__icon {
   font-size: 40px;
-  margin-bottom: 16px;
+  margin: 30px 0 16px;
   display: block;
 }
+.vehicle-card__name,
+.vehicle-card__desc { padding: 0 24px; }
 .vehicle-card__name {
   font-family: var(--font-jp-serif);
   font-size: 18px;
@@ -456,7 +473,9 @@
     <!-- 01 電柱輸送 -->
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
-        <div class="service-detail__icon-wrap">
+        <img src="images/yard-poles.jpg" width="780" height="750" loading="lazy" decoding="async"
+             class="service-detail__photo" alt="出荷ヤードでコンクリートポールを積載した平ボディ車">
+        <div class="service-detail__icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
             <rect x="11" y="2" width="2" height="20"/>
             <line x1="6" y1="7" x2="18" y2="7"/>
@@ -484,7 +503,9 @@
     <!-- 02 電力インフラ資材輸送 -->
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
-        <div class="service-detail__icon-wrap">
+        <img src="images/gallery-04.jpg" width="900" height="455" loading="lazy" decoding="async"
+             class="service-detail__photo" alt="電力関連資材を積んで工場前を走る長尺トレーラー">
+        <div class="service-detail__icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
           </svg>
@@ -508,7 +529,9 @@
     <!-- 03 現場直送・タイムリー配送 -->
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
-        <div class="service-detail__icon-wrap">
+        <img src="images/gallery-01.jpg" width="900" height="507" loading="lazy" decoding="async"
+             class="service-detail__photo" alt="出庫前に整列した橋村運送の車両。現場へ向かう準備を整えたところ">
+        <div class="service-detail__icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
             <circle cx="12" cy="10" r="3"/>
@@ -533,7 +556,9 @@
     <!-- 04 各種インフラ関連資材輸送 -->
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
-        <div class="service-detail__icon-wrap">
+        <img src="images/svc-large.jpg" width="900" height="486" loading="lazy" decoding="async"
+             class="service-detail__photo" alt="インフラ資材を積載した大型トラックとトレーラー">
+        <div class="service-detail__icon-wrap" aria-hidden="true">
           <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
             <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
@@ -569,17 +594,20 @@
     </div>
     <div class="vehicles__grid">
       <article class="vehicle-card fade-in fade-in--delay-1">
-        <span class="vehicle-card__icon" aria-hidden="true">🚛</span>
+        <img src="images/svc-large.jpg" width="900" height="486" loading="lazy" decoding="async"
+                 class="vehicle-card__photo" alt="橋村運送の大型平ボディ車">
         <h3 class="vehicle-card__name">平ボディ車（大型）</h3>
         <p class="vehicle-card__desc">電柱・長尺資材の輸送に最適。広い荷台で大型資材も安全に積載できます。</p>
       </article>
       <article class="vehicle-card fade-in fade-in--delay-2">
-        <span class="vehicle-card__icon" aria-hidden="true">🏗️</span>
+        <img src="images/gallery-06.jpg" width="900" height="641" loading="lazy" decoding="async"
+                 class="vehicle-card__photo" alt="クレーンを搭載したユニック車">
         <h3 class="vehicle-card__name">ユニック車（クレーン付）</h3>
         <p class="vehicle-card__desc">クレーン機能付きで、重量物の積み降ろしを現場で自在に行えます。</p>
       </article>
       <article class="vehicle-card fade-in fade-in--delay-1">
-        <span class="vehicle-card__icon" aria-hidden="true">🚚</span>
+        <img src="images/svc-medium.jpg" width="900" height="517" loading="lazy" decoding="async"
+                 class="vehicle-card__photo" alt="橋村運送の中型平ボディ車">
         <h3 class="vehicle-card__name">平ボディ車（中型）</h3>
         <p class="vehicle-card__desc">中型資材の輸送に対応。狭隘路や住宅街など限られたスペースでも活躍。</p>
       </article>
