@@ -540,6 +540,92 @@
   </div>
 </section>
 
+<!-- ===== 現場のいま（写真ギャラリー） ===== -->
+<section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section__label">Our Work</p>
+      <h2 id="gallery-title" class="section__title">現場のいま</h2>
+      <p class="section__desc">
+        電柱の積み込みから現場への輸送、そして先導まで。<br>
+        橋村運送の日常をご覧ください。
+      </p>
+    </div>
+  </div>
+
+  <div class="gallery" id="gallery-carousel" aria-roledescription="カルーセル" aria-label="現場の写真">
+    <button class="gallery__nav gallery__nav--prev" type="button" aria-label="前の写真を見る">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <ul class="gallery__track" id="gallery-track" tabindex="0"
+        aria-label="現場の写真一覧（横にスクロールできます）">
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-01.jpg" width="900" height="507" loading="lazy" decoding="async"
+               alt="出庫前に整列した橋村運送の車両。夕暮れの車庫に平ボディ車が並ぶ">
+          <figcaption class="gallery__caption">出庫前の車両。ここから九州各地の現場へ向かいます。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-02.jpg" width="900" height="640" loading="lazy" decoding="async"
+               alt="コンクリートポールを満載してヤードを出発するトレーラー">
+          <figcaption class="gallery__caption">コンクリートポールを積載し、ヤードから出発します。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-03.jpg" width="900" height="506" loading="lazy" decoding="async"
+               alt="電柱を積載した輸送車と、その前方を走る誘導車">
+          <figcaption class="gallery__caption">長尺物の輸送は、誘導車と2台1組で安全を確保します。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-04.jpg" width="900" height="455" loading="lazy" decoding="async"
+               alt="工場前の道路を走る、電柱を積んだ長尺トレーラー">
+          <figcaption class="gallery__caption">工場から現場へ。長尺トレーラーで運びます。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-05.jpg" width="900" height="610" loading="lazy" decoding="async"
+               alt="クレーンを搭載した橋村運送のユニック車の全体像">
+          <figcaption class="gallery__caption">クレーン付ユニック車。積み降ろしまで対応します。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-06.jpg" width="900" height="641" loading="lazy" decoding="async"
+               alt="クレーンを格納したユニック車。竹林を背にした車庫での一枚">
+          <figcaption class="gallery__caption">現場での積み降ろしに備えるユニック車。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-07.jpg" width="900" height="579" loading="lazy" decoding="async"
+               alt="竹林を背に並ぶ橋村運送の車両群">
+          <figcaption class="gallery__caption">出番を待つ車両。平ボディ車とユニック車を保有しています。</figcaption>
+        </figure>
+      </li>
+      <li class="gallery__item">
+        <figure class="gallery__figure">
+          <img src="images/gallery-08.jpg" width="900" height="507" loading="lazy" decoding="async"
+               alt="橋村運送のトラックを正面から捉えた一枚">
+          <figcaption class="gallery__caption">出発前の一台。安全は日々の点検から始まります。</figcaption>
+        </figure>
+      </li>
+    </ul>
+
+    <button class="gallery__nav gallery__nav--next" type="button" aria-label="次の写真を見る">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="gallery__dots" id="gallery-dots" aria-label="表示する写真を選ぶ"></div>
+  </div>
+</section>
+
 <!-- ===== 事業部紹介 ===== -->
 <section id="group" class="group-section section section--light" aria-labelledby="group-title">
   <div class="container">
@@ -752,10 +838,10 @@
         <form id="contact-form" novalidate>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label" for="company">
+              <label class="form-label" for="contact-company">
                 会社名<span class="form-label__required" aria-label="必須">必須</span>
               </label>
-              <input type="text" id="company" name="company" class="form-input"
+              <input type="text" id="contact-company" name="company" class="form-input"
                      placeholder="株式会社〇〇" required autocomplete="organization">
             </div>
             <div class="form-group">

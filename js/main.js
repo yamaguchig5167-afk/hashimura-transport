@@ -149,7 +149,7 @@ function initContactForm() {
 
     // データ収集
     const formData = {
-      company:      form.querySelector('#company').value.trim(),
+      company:      form.querySelector('#contact-company').value.trim(),
       name:         form.querySelector('#name').value.trim(),
       tel:          form.querySelector('#tel').value.trim(),
       email:        form.querySelector('#email').value.trim(),
@@ -348,6 +348,147 @@ function initBackToTop() {
 }
 
 /* ============================================================
+   現場のいま（写真カルーセル）
+
+   横スクロールはCSSのスクロールスナップに任せ、
+   JSは「自動送り」「現在位置の表示」「ボタン操作」だけを担当する。
+   自動送りは以下の場合に止める：
+     ・利用者が操作している最中（スワイプ・ホバー・キーボード）
+     ・セクションが画面外にある
+     ・端末が「動きを減らす」設定になっている
+     ・タブが非表示になっている
+   ============================================================ */
+function initGallery() {
+  const track = document.getElementById('gallery-track');
+  const dotsBox = document.getElementById('gallery-dots');
+  if (!track || !dotsBox) return;
+
+  const items = Array.from(track.querySelectorAll('.gallery__item'));
+  if (items.length < 2) return;
+
+  const prevBtn = document.querySelector('.gallery__nav--prev');
+  const nextBtn = document.querySelector('.gallery__nav--next');
+  const INTERVAL = 5000;   // 自動送りの間隔
+  const RESUME_AFTER = 9000; // 操作後、自動送りを再開するまでの時間
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+  let timer = null;
+  let resumeTimer = null;
+  let inView = false;
+  let paused = false;
+
+  /* ---- インジケータを生成 ---- */
+  const dots = items.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'gallery__dot';
+    b.setAttribute('aria-label', `${i + 1}枚目の写真を表示`);
+    b.addEventListener('click', () => {
+      goTo(i);
+      holdAutoplay();
+    });
+    dotsBox.appendChild(b);
+    return b;
+  });
+
+  /* ---- 現在位置を反映 ---- */
+  function markCurrent(index) {
+    current = index;
+    dots.forEach((d, i) => d.setAttribute('aria-current', i === index ? 'true' : 'false'));
+    if (prevBtn) prevBtn.disabled = index === 0;
+    if (nextBtn) nextBtn.disabled = index === items.length - 1;
+  }
+
+  /* ---- 指定の写真へスクロール ---- */
+  function goTo(index) {
+    const i = Math.max(0, Math.min(items.length - 1, index));
+    const target = items[i];
+    // 中央寄せの位置を自前で計算する（scrollIntoViewはページ全体を動かすため使わない）
+    const left = target.offsetLeft - (track.clientWidth - target.clientWidth) / 2;
+    track.scrollTo({ left: left, behavior: reduceMotion ? 'auto' : 'smooth' });
+    markCurrent(i);
+  }
+
+  /* ---- スクロール位置から現在の写真を判定 ---- */
+  let scrollTick = null;
+  track.addEventListener('scroll', () => {
+    if (scrollTick) return;
+    scrollTick = setTimeout(() => {
+      scrollTick = null;
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let nearest = 0;
+      let min = Infinity;
+      items.forEach((el, i) => {
+        const d = Math.abs(el.offsetLeft + el.clientWidth / 2 - center);
+        if (d < min) { min = d; nearest = i; }
+      });
+      markCurrent(nearest);
+    }, 120);
+  }, { passive: true });
+
+  /* ---- 自動送り ---- */
+  function tick() {
+    const next = current >= items.length - 1 ? 0 : current + 1;
+    goTo(next);
+  }
+  function startAutoplay() {
+    if (timer || reduceMotion || paused || !inView || document.hidden) return;
+    timer = setInterval(tick, INTERVAL);
+  }
+  function stopAutoplay() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  /* 利用者が操作したら一旦止め、しばらく操作がなければ再開する */
+  function holdAutoplay() {
+    paused = true;
+    stopAutoplay();
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      paused = false;
+      startAutoplay();
+    }, RESUME_AFTER);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); holdAutoplay(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); holdAutoplay(); });
+
+  ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(ev => {
+    track.addEventListener(ev, holdAutoplay, { passive: true });
+  });
+  const carousel = document.getElementById('gallery-carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => { paused = true; stopAutoplay(); });
+    carousel.addEventListener('mouseleave', () => { paused = false; startAutoplay(); });
+    carousel.addEventListener('focusin', holdAutoplay);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay(); else startAutoplay();
+  });
+
+  /* 画面内にある時だけ動かす */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        inView = e.isIntersecting;
+        if (inView) startAutoplay(); else stopAutoplay();
+      });
+    }, { threshold: 0.35 }).observe(track);
+  } else {
+    inView = true;
+    startAutoplay();
+  }
+
+  /* 左右キーで操作できるようにする */
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+  });
+
+  markCurrent(0);
+}
+
+/* ============================================================
    保有車両セクション — 特別な処理なし
    スクロールフェードは initScrollAnimation() が担当
    ============================================================ */
@@ -363,6 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initCounters();
   initBackToTop();
+  initGallery();
 
   console.log(
     '%c有限会社橋村運送 公式サイト',

@@ -1924,6 +1924,120 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   border-top: 3px solid var(--accent-gold);
 }
 
+/* ============================================================
+   現場のいま（写真カルーセル）
+   ネイティブの横スクロール＋スクロールスナップで作っている。
+   指でのスワイプ・キーボード操作・自動送りの停止が素直に効くため。
+   ============================================================ */
+.gallery-section {
+  background: var(--white);
+  padding-bottom: 88px;
+}
+.gallery {
+  position: relative;
+  margin-top: 44px;
+}
+/* スクロールする帯 */
+.gallery__track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  /* 左右に余白を置き、次の写真が少し覗く＝スクロールできることを示す */
+  padding: 4px max(24px, calc((100% - var(--max-width)) / 2 + 24px)) 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gallery__track::-webkit-scrollbar { display: none; }
+.gallery__track:focus-visible {
+  outline: 3px solid var(--blue-primary);
+  outline-offset: -3px;
+}
+.gallery__item {
+  flex: 0 0 min(520px, 78vw);
+  scroll-snap-align: center;
+  list-style: none;
+}
+.gallery__figure {
+  margin: 0;
+  height: 100%;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.gallery__item:hover .gallery__figure { box-shadow: var(--shadow-md); }
+.gallery__figure img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center 55%;
+  background: var(--bg-light);
+}
+.gallery__caption {
+  padding: 14px 18px 16px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--slate-mid);
+  border-top: 3px solid var(--accent-gold);
+}
+/* 左右ボタン（マウス操作向け。タッチではスワイプできるので隠す） */
+.gallery__nav {
+  position: absolute;
+  top: 150px;
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--blue-primary);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.gallery__nav:hover { background: var(--blue-primary); color: var(--white); border-color: var(--blue-primary); }
+.gallery__nav:focus-visible { outline: 3px solid var(--blue-primary); outline-offset: 3px; }
+.gallery__nav[disabled] { opacity: 0.35; cursor: default; }
+.gallery__nav--prev { left: 16px; }
+.gallery__nav--next { right: 16px; }
+@media (hover: none) {
+  .gallery__nav { display: none; }
+}
+/* インジケータ */
+.gallery__dots {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 6px;
+}
+.gallery__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #C7D4E0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.gallery__dot[aria-current="true"] {
+  background: var(--blue-primary);
+  width: 26px;
+  border-radius: 5px;
+}
+.gallery__dot:focus-visible { outline: 3px solid var(--blue-primary); outline-offset: 3px; }
+
 /* ===== 車両タイプカード ===== */
 .truck-types {
   display: grid;
@@ -2374,4 +2488,19 @@ body .breadcrumb__list li {
   body .contact__email-link      { font-size: 14px; }
   body .news-badge               { font-size: 12px; }
   body .sidebar-widget__title    { font-size: 12px; }
+  body .gallery__caption         { font-size: 13.5px; line-height: 1.8; }
+}
+
+/* ギャラリーのスマホ表示 */
+@media (max-width: 600px) {
+  .gallery-section { padding-bottom: 64px; }
+  .gallery__track { gap: 14px; padding: 4px 20px 18px; }
+  .gallery__item { flex-basis: 84vw; }
+  .gallery__figure img { height: 215px; }
+  .gallery__caption { padding: 12px 15px 14px; }
+}
+
+/* 「動きを減らす」設定の端末では自動送りしない（JS側でも判定している）*/
+@media (prefers-reduced-motion: reduce) {
+  .gallery__track { scroll-behavior: auto; }
 }
