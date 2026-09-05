@@ -127,7 +127,7 @@
 .service-detail:nth-child(even) { direction: rtl; }
 .service-detail:nth-child(even) > * { direction: ltr; }
 
-/* 実際の車両写真を敷き、アイコンは左下に小さく重ねる */
+/* 実際の車両写真（写真の見やすさを優先し、アイコンの重ねは廃止）*/
 .service-detail__visual {
   background: var(--blue-light);
   border-radius: 16px;
@@ -142,25 +142,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center 55%;
-}
-.service-detail__icon-wrap {
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-md);
-}
-.service-detail__icon-wrap svg {
-  width: 40px;
-  height: 40px;
-  stroke: var(--blue-primary);
-  fill: none;
 }
 .service-detail__body {}
 .service-detail__num {
@@ -368,7 +349,21 @@
   .services-cta { padding: 40px 28px; }
 }
 @media (max-width: 600px) {
-  .vehicles__grid { grid-template-columns: 1fr 1fr; }
+  /* 2カラムだとカード幅が136pxまで潰れ、写真も文字も読めなくなるため1カラムにする */
+  .vehicles__grid { grid-template-columns: 1fr; gap: 20px; margin-top: 32px; }
+  .vehicle-card__photo { height: 200px; }
+  .vehicle-card__name { font-size: 19px; }
+  .vehicle-card__desc { font-size: 14px; line-height: 1.85; }
+
+  /* ③ サービス詳細の区切りの余白（80px+80px）はスマホでは間延びする */
+  .service-detail { margin-bottom: 44px; padding-bottom: 44px; gap: 22px; }
+  .service-detail__name { margin-bottom: 12px; }
+  .service-detail__desc { margin-bottom: 16px; }
+
+  /* 対応エリア・CTAの内側余白 */
+  .area-section { padding: 32px 20px; }
+  .services-cta { padding: 32px 20px; }
+  .area-tag { font-size: 13.5px; padding: 9px 16px; }
   .services-cta__btns { flex-direction: column; align-items: center; }
 }
 </style>
@@ -474,16 +469,8 @@
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
         <img src="images/yard-poles.jpg" srcset="images/yard-poles-sm.jpg 480w, images/yard-poles-md.jpg 720w, images/yard-poles.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="780" height="750" loading="lazy" decoding="async"
-             class="service-detail__photo" alt="出荷ヤードでコンクリートポールを積載した平ボディ車">
-        <div class="service-detail__icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
-            <rect x="11" y="2" width="2" height="20"/>
-            <line x1="6" y1="7" x2="18" y2="7"/>
-            <line x1="8" y1="11" x2="16" y2="11"/>
-            <circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/>
-            <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </div>
+             class="service-detail__photo" style="object-position: center 78%;"
+             alt="出荷ヤードでコンクリートポールを積載した平ボディ車">
       </div>
       <div class="service-detail__body">
         <p class="service-detail__num">SERVICE 01</p>
@@ -505,11 +492,6 @@
       <div class="service-detail__visual">
         <img src="images/gallery-04.jpg" srcset="images/gallery-04-sm.jpg 480w, images/gallery-04-md.jpg 720w, images/gallery-04.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="900" height="455" loading="lazy" decoding="async"
              class="service-detail__photo" alt="電力関連資材を積んで工場前を走る長尺トレーラー">
-        <div class="service-detail__icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
       </div>
       <div class="service-detail__body">
         <p class="service-detail__num">SERVICE 02</p>
@@ -531,12 +513,6 @@
       <div class="service-detail__visual">
         <img src="images/gallery-01.jpg" srcset="images/gallery-01-sm.jpg 480w, images/gallery-01-md.jpg 720w, images/gallery-01.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="900" height="507" loading="lazy" decoding="async"
              class="service-detail__photo" alt="出庫前に整列した橋村運送の車両。現場へ向かう準備を整えたところ">
-        <div class="service-detail__icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-        </div>
       </div>
       <div class="service-detail__body">
         <p class="service-detail__num">SERVICE 03</p>
@@ -558,12 +534,6 @@
       <div class="service-detail__visual">
         <img src="images/svc-large.jpg" srcset="images/svc-large-sm.jpg 480w, images/svc-large-md.jpg 720w, images/svc-large.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="900" height="486" loading="lazy" decoding="async"
              class="service-detail__photo" alt="インフラ資材を積載した大型トラックとトレーラー">
-        <div class="service-detail__icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" stroke-width="1.8" aria-hidden="true">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-          </svg>
-        </div>
       </div>
       <div class="service-detail__body">
         <p class="service-detail__num">SERVICE 04</p>
