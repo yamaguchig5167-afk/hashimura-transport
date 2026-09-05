@@ -36,6 +36,32 @@
 | `ogp.jpg` | 1200×630 | OGP画像（SNSシェア時のサムネイル）|
 | `favicon.svg` | SVG | ファビコン（`favicon.ico` はルートに配置）|
 
+## 表示サイズ違いのファイル（-sm / -md）
+
+スマートフォンでの通信量を減らすため、同じ写真を3サイズ用意して
+HTML側の `srcset` で出し分けている。
+
+| 接尾辞 | 幅 | 主に使われる端末 |
+|---|---|---|
+| `-sm.jpg` | 480px | 画面密度が標準のスマホ |
+| `-md.jpg` | 720px | 一般的なスマホ（画面密度2倍）|
+| （なし） | 900px | タブレット・パソコン |
+
+ヒーロー背景はCSS指定のため `srcset` が使えず、600px以下では
+`hero-fleet-sm.jpg`（幅800px）をCSSのメディアクエリで指定している。
+
+**写真を差し替えたら、必ず3サイズとも作り直すこと。**
+
+```bash
+magick 元画像.jpg -resize 900x -strip -interlace Plane -sampling-factor 4:2:0 -quality 83 名前.jpg
+magick 名前.jpg -resize 720x -strip -interlace Plane -sampling-factor 4:2:0 -quality 79 名前-md.jpg
+magick 名前.jpg -resize 480x -strip -interlace Plane -sampling-factor 4:2:0 -quality 80 名前-sm.jpg
+```
+
+`srcset` の `sizes` を変えるときは、実機幅375pxで
+「表示幅 × 画面密度」がどのサイズに当たるかを確認すること。
+`sizes` が実際の表示幅より大きいと、常に900px版が選ばれて効果がなくなる。
+
 ## 写真を扱うときの注意（重要）
 
 ### 1. 旧グループ会社名が車体に入っている

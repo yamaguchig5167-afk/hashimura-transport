@@ -2040,25 +2040,38 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .gallery__dots {
   display: flex;
   justify-content: center;
-  gap: 9px;
-  margin-top: 6px;
+  gap: 0;
+  margin-top: 0;
 }
+/* 見た目は小さな点のままだが、ボタン自体を34×34pxにして指で押せるようにする。
+   （当たり判定だけを疑似要素で広げると隣のドットと重なって誤タップするため、
+     ボタンそのものを大きくして余白で間隔を取っている）*/
 .gallery__dot {
-  width: 9px;
-  height: 9px;
+  width: 42px;
+  height: 42px;
   padding: 0;
   border: none;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.gallery__dot::before {
+  content: '';
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: #C7D4E0;
-  cursor: pointer;
   transition: var(--transition);
 }
-.gallery__dot[aria-current="true"] {
+.gallery__dot[aria-current="true"]::before {
   background: var(--blue-primary);
   width: 26px;
   border-radius: 5px;
 }
-.gallery__dot:focus-visible { outline: 3px solid var(--blue-primary); outline-offset: 3px; }
+.gallery__dot:focus-visible { outline: 3px solid var(--blue-primary); outline-offset: -3px; border-radius: 50%; }
 
 /* ===== 車両タイプカード ===== */
 .truck-types {
@@ -2321,6 +2334,82 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 
 /* ============================================================
+   スマートフォンの操作性対策（2026-09-05 監査により追加）
+
+   375px幅の実機相当で全ページを走査したところ、
+   ①指で押す部分が小さすぎる箇所が多数（最小9×9px）
+   ②ヒーローの高さが100vhで、アドレスバーの分だけ下端が隠れる
+   ③固定ヘッダーがあるのに scroll-padding-top が無く、
+     アンカーリンクで飛ぶと見出しがヘッダーの下に潜る
+   が確認されたため、以下で対処している。
+   ============================================================ */
+
+/* 固定ヘッダー（68px）の分だけ、アンカー着地位置を下げる */
+html {
+  scroll-padding-top: 84px;
+}
+
+@media (max-width: 600px) {
+  /* ヒーロー：100vh はアドレスバーの高さを含むため、
+     下端の統計バーがブラウザUIに隠れる。小さいほうのビューポート高で固定する */
+  .hero {
+    height: 100svh;
+    max-height: none;
+  }
+
+  /* --- 指で押す部分は最低44×44pxを確保する --- */
+
+  /* メニューボタン */
+  .hamburger {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+
+  /* 電話・メールのリンク（文章中でも押しやすくする） */
+  .link--tel,
+  .link--email,
+  .contact__email-link,
+  .footer__contact-item a,
+  .company-table td a,
+  .info-table td a,
+  .sidebar-contact__tel {
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
+    padding: 0 2px;
+  }
+  /* 上下に詰まらないよう、行の高さぶんの余白を相殺する */
+  .footer__contact-item a { line-height: 40px; min-height: 40px; }
+
+  /* パンくずリスト */
+  .breadcrumb { padding: 4px 20px; }
+  .breadcrumb__list a {
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
+  }
+  .breadcrumb__list li { display: flex; align-items: center; }
+
+  /* フッターのナビリンク */
+  .footer__nav-links a {
+    display: inline-block;
+    min-height: 40px;
+    line-height: 40px;
+  }
+}
+
+/* 横スクロールできる帯は、右端をわずかにぼかして
+   「まだ先がある」ことが分かるようにする */
+@media (max-width: 900px) {
+  .hero__stats,
+  .trust-strip {
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+  }
+}
+
+/* ============================================================
    スマートフォンでの可読性対策（2026-08-29 監査により追加）
 
    375px幅の実機相当で全ページの文字を実測したところ、
@@ -2422,7 +2511,7 @@ body .breadcrumb__list li {
     background-image:
       linear-gradient(180deg, rgba(5,45,87,0.55) 0%, rgba(5,45,87,0.18) 38%, rgba(5,45,87,0.72) 100%),
       linear-gradient(105deg, rgba(5,45,87,0.95) 0%, rgba(8,64,122,0.92) 42%, rgba(11,92,173,0.82) 100%),
-      url('../images/hero-fleet.jpg');
+      url('../images/hero-fleet-sm.jpg');  /* スマホでは軽量版（238KB→75KB）*/
     background-size: cover, cover, cover;
     background-position: center, center, center 48%;
   }
