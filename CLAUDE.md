@@ -36,7 +36,7 @@ hashimura-transport/
 ├── images/                # 実車両写真一式（詳細は images/README.md）
 │   ├── favicon.svg / ogp.jpg
 │   ├── hero-fleet.jpg / pilot-car.jpg / yard-poles.jpg
-│   ├── fleet-lineup.jpg / fleet-unic.jpg / safety-bg.jpg
+│   ├── fleet-lineup.jpg / fleet-unic.jpg / safety-meeting.jpg
 │   └── README.md          # 画像ガイド
 └── .github/
     └── workflows/
@@ -139,8 +139,12 @@ hashimura-transport/
 - alt テキストは必ず日本語で記述する
 - 公開前に必ず EXIF を削除する（`magick ... -strip`）
 - **車体に「物流ハシムラ」が明瞭に読める写真は使わない**（事業部表記に統一しているため）
-- **従業員の顔が判別できる写真は、本人の同意が確認できるまで使わない**
-- 取引先の社名・ロゴの写り込みがないか確認する
+- **正面から顔が判別できる写真は、本人の同意が確認できるまで使わない**
+  （安全教育の `safety-meeting.jpg` は橋村運送様のご指示により掲載。全員マスク着用で
+  後ろ姿または横顔であり、掲載サイズでは個人を識別できない構図を選んでいる）
+- **取引先の社名・ロゴの写り込みがないか必ず確認する。**
+  安全教育の写真には壁面に「九州髙圧コンクリート工業株式会社」の社名が写っていたため
+  上端をトリミングして除外している。`safety-meeting.jpg` の上を切り足してはいけない
 
 ---
 

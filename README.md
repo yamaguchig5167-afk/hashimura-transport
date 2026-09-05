@@ -40,7 +40,7 @@ hashimura-transport/
 ├── images/                    ← 実車両写真一式。詳細は images/README.md
 │   ├── favicon.svg  ogp.jpg
 │   ├── hero-fleet.jpg  pilot-car.jpg  yard-poles.jpg
-│   ├── fleet-lineup.jpg  fleet-unic.jpg  safety-bg.jpg
+│   ├── fleet-lineup.jpg  fleet-unic.jpg  safety-meeting.jpg
 │   └── README.md              ← 画像ガイド（社名の写り込み等の注意あり）
 └── .github/workflows/deploy.yml ← GitHub Pages 自動デプロイ
 ```

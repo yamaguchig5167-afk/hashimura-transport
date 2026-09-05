@@ -76,8 +76,9 @@ ul { list-style: none; }
 .section--dark {
   background: var(--slate-dark);
 }
-/* 安全セクション：安全教育の様子を背景に敷く
-   個人が特定できないよう強くぼかしたうえ、低不透明度で重ねている */
+/* 安全セクション
+   安全教育の様子は、ぼかした背景ではなく実際の写真として掲載している
+   （2026-09-05 に写真を差し替え）。背景には薄いグラデーションのみ敷く。 */
 #safety {
   position: relative;
   overflow: hidden;
@@ -86,13 +87,34 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../images/safety-bg.jpg') center 35% / cover no-repeat;
-  opacity: 0.14;
+  background: radial-gradient(circle at 78% 8%, rgba(11, 92, 173, 0.28) 0%, transparent 58%);
   pointer-events: none;
 }
 #safety > .container {
   position: relative;
   z-index: 1;
+}
+
+/* 安全教育の写真 */
+.safety-photo {
+  margin: 40px auto 8px;
+  max-width: 760px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.safety-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.safety-photo__caption {
+  padding: 14px 18px 16px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.86);
+  border-top: 3px solid var(--accent-gold);
 }
 .section--light {
   background: var(--bg-light);
@@ -2489,6 +2511,9 @@ body .breadcrumb__list li {
   body .news-badge               { font-size: 12px; }
   body .sidebar-widget__title    { font-size: 12px; }
   body .gallery__caption         { font-size: 13.5px; line-height: 1.8; }
+  body .safety-photo__caption    { font-size: 13.5px; line-height: 1.8; }
+  .safety-photo                  { margin-top: 28px; }
+  .safety-photo__caption         { padding: 12px 15px 14px; }
 }
 
 /* ギャラリーのスマホ表示 */
