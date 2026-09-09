@@ -131,7 +131,6 @@
 .service-detail__visual {
   background: var(--blue-light);
   border-radius: 16px;
-  aspect-ratio: 4/3;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -139,9 +138,7 @@
 .service-detail__photo {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 55%;
+  height: auto;
 }
 .service-detail__body {}
 .service-detail__num {
@@ -225,11 +222,11 @@
 .vehicle-card__photo {
   display: block;
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  object-position: center 55%;
-  margin-bottom: 22px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   background: var(--bg-light);
+  margin-bottom: 22px;
 }
 /* 写真のないカード（Gマーク）はアイコンで揃える */
 .vehicle-card__icon {
@@ -351,7 +348,7 @@
 @media (max-width: 600px) {
   /* 2カラムだとカード幅が136pxまで潰れ、写真も文字も読めなくなるため1カラムにする */
   .vehicles__grid { grid-template-columns: 1fr; gap: 20px; margin-top: 32px; }
-  .vehicle-card__photo { height: 200px; }
+  /* 高さは aspect-ratio で決まるため個別指定は不要 */
   .vehicle-card__name { font-size: 19px; }
   .vehicle-card__desc { font-size: 14px; line-height: 1.85; }
 
@@ -469,7 +466,7 @@
     <div class="service-detail fade-in">
       <div class="service-detail__visual">
         <img src="images/yard-poles.jpg" srcset="images/yard-poles-sm.jpg 480w, images/yard-poles-md.jpg 720w, images/yard-poles.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="780" height="750" loading="lazy" decoding="async"
-             class="service-detail__photo" style="object-position: center 78%;"
+             class="service-detail__photo"
              alt="出荷ヤードでコンクリートポールを積載した平ボディ車">
       </div>
       <div class="service-detail__body">

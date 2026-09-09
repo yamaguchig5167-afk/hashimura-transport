@@ -67,6 +67,33 @@ magick 名前.jpg -resize 480x -strip -interlace Plane -sampling-factor 4:2:0 -q
 「表示幅 × 画面密度」がどのサイズに当たるかを確認すること。
 `sizes` が実際の表示幅より大きいと、常に900px版が選ばれて効果がなくなる。
 
+## 写真の枠と切り抜き（2026-09-09 修正）
+
+**枠の高さを固定して `object-fit: cover` にしない。** 写真の縦横比が枠と違う分だけ
+車両が強制的に切り落とされ、実測で最大49%（`fleet-unic.jpg`）が欠けていた。
+
+現在の方式は2通り。
+
+| 用途 | 指定 | 理由 |
+|---|---|---|
+| 単独・2枚並びの写真<br>（保有車両・サービス詳細・安全講習・ヤード作業） | 枠を固定せず元の縦横比のまま | 切り落としも余白も出ない。車両が一番大きく見える |
+| カルーセル・車両カード・職種カード | `aspect-ratio: 16/9` ＋ `object-fit: contain` | 高さが揃わないと並びが崩れるため。containなので車両は必ず枠内に収まる |
+
+`contain` を使う場合は **CSSに `height: auto` を必ず書く**。
+`<img>` の `height` 属性が presentational hint として効いてしまい、
+`aspect-ratio` が無視される（実際に車両カードの高さが271pxではなく486pxになっていた）。
+
+写真を追加したら、ブラウザで以下を実行して**切れが0件**であることを確認する。
+
+```js
+[...document.querySelectorAll('img')].filter(i=>i.naturalWidth).map(i=>{
+  const r=i.getBoundingClientRect(), f=getComputedStyle(i).objectFit;
+  const box=r.width/r.height, src=i.naturalWidth/i.naturalHeight;
+  const d=Math.max(src>box?1-box/src:0, src<box?1-src/box:0);
+  return {src:i.currentSrc.split('/').pop(), fit:f, 差:Math.round(d*100)+'%'};
+}).filter(x=>x.fit==='cover' && x.差!=='0%')
+```
+
 ## 写真を扱うときの注意（重要）
 
 ### 1. 旧グループ会社名が車体に入っている

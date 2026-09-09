@@ -118,6 +118,7 @@ ul { list-style: none; }
 }
 /* 安全教育の写真を2枚並べる。スマホでは1列に落とす */
 .safety-photos {
+  align-items: start;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
@@ -125,8 +126,8 @@ ul { list-style: none; }
   max-width: 960px;
 }
 .safety-photos .safety-photo { margin: 0; max-width: none; }
-/* 元写真の縦横比が違うとキャプション位置がずれるため、3:2に揃える */
-.safety-photos .safety-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
+/* 枠に合わせて切り落とすと車両が欠けるため、元の縦横比のまま表示する */
+.safety-photos .safety-photo img { aspect-ratio: auto; object-fit: fill; }
 @media (max-width: 780px) {
   .safety-photos { grid-template-columns: 1fr; gap: 18px; margin-top: 28px; }
 }
@@ -1949,9 +1950,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .fleet-photo img {
   display: block;
   width: 100%;
-  height: 320px;
-  object-fit: cover;
-  object-position: center 55%;
+  height: auto;
 }
 .fleet-photo__caption {
   padding: 14px 18px 16px;
@@ -2013,9 +2012,9 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .gallery__figure img {
   display: block;
   width: 100%;
-  height: 300px;
-  object-fit: cover;
-  object-position: center 55%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   background: var(--bg-light);
 }
 .gallery__caption {
@@ -2287,7 +2286,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (max-width: 900px) {
   .fleet-section { padding: 64px 0 0; }
   .fleet-photos { grid-template-columns: 1fr; gap: 20px; padding-top: 32px; }
-  .fleet-photo img { height: 260px; }
+  /* 高さは aspect-ratio で決まるため個別指定は不要 */
 }
 @media (max-width: 700px) {
   .group-cards { grid-template-columns: 1fr; gap: 20px; }
@@ -2296,7 +2295,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 }
 @media (max-width: 600px) {
   .fleet-section { padding: 56px 0 0; }
-  .fleet-photo img { height: 210px; }
+  /* 同上 */
   .fleet-photo__caption { font-size: 12.5px; padding: 12px 15px 14px; }
   .truck-types { grid-template-columns: 1fr; gap: 16px; padding: 32px 0 56px; }
   .truck-type-card { padding: 20px 18px; gap: 16px; }
@@ -2657,7 +2656,7 @@ body .breadcrumb__list li {
   .gallery-section { padding-bottom: 64px; }
   .gallery__track { gap: 14px; padding: 4px 20px 18px; }
   .gallery__item { flex-basis: 84vw; }
-  .gallery__figure img { height: 215px; }
+  /* 高さは aspect-ratio で決まるため個別指定は不要 */
   .gallery__caption { padding: 12px 15px 14px; }
 }
 
