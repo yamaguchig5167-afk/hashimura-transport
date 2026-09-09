@@ -236,6 +236,20 @@
   border-top: 3px solid var(--accent-gold);
 }
 
+/* 作業風景（2枚並び）。スマホでは1列に落とす */
+.work-photos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 44px;
+}
+.work-photos .work-photo { margin: 0; max-width: none; }
+/* 元写真の縦横比が違うとキャプション位置がずれるため、3:2に揃える */
+.work-photos .work-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
+@media (max-width: 780px) {
+  .work-photos { grid-template-columns: 1fr; gap: 20px; margin-top: 32px; }
+}
+
 /* フローセクション（作業の流れ） */
 .work-flow {
   display: grid;
@@ -638,6 +652,24 @@
           </ul>
         </div>
       </article>
+    </div>
+
+    <!-- 荷積み・クレーン作業の様子 -->
+    <div class="work-photos fade-in">
+      <figure class="work-photo">
+        <img src="images/yard-loading.jpg" srcset="images/yard-loading-sm.jpg 480w, images/yard-loading-md.jpg 720w, images/yard-loading.jpg 870w" sizes="(max-width: 780px) 88vw, 44vw" width="870" height="652" loading="lazy" decoding="async"
+             alt="ヤードでクレーン付き車両2台を使い、コンクリートポールを平ボディ車へ積み付ける作業の様子">
+        <figcaption class="work-photo__caption">
+          クレーン付き車両を使った荷積み。積み付け順と重量バランスを確認しながら進めます。
+        </figcaption>
+      </figure>
+      <figure class="work-photo">
+        <img src="images/yard-crane.jpg" srcset="images/yard-crane-sm.jpg 480w, images/yard-crane-md.jpg 720w, images/yard-crane.jpg 870w" sizes="(max-width: 780px) 88vw, 44vw" width="870" height="505" loading="lazy" decoding="async"
+             alt="ヤードに保管されたコンクリートポールを、作業員が玉掛けしてクレーンで吊り上げる様子">
+        <figcaption class="work-photo__caption">
+          クレーン作業中は周囲の安全確保を最優先に、複数名で声を掛け合いながら作業します。
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

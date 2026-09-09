@@ -116,6 +116,20 @@ ul { list-style: none; }
   color: rgba(255, 255, 255, 0.86);
   border-top: 3px solid var(--accent-gold);
 }
+/* 安全教育の写真を2枚並べる。スマホでは1列に落とす */
+.safety-photos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin: 40px auto 8px;
+  max-width: 960px;
+}
+.safety-photos .safety-photo { margin: 0; max-width: none; }
+/* 元写真の縦横比が違うとキャプション位置がずれるため、3:2に揃える */
+.safety-photos .safety-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
+@media (max-width: 780px) {
+  .safety-photos { grid-template-columns: 1fr; gap: 18px; margin-top: 28px; }
+}
 .section--light {
   background: var(--bg-light);
 }
