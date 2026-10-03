@@ -26,6 +26,13 @@ let ng = 0;
 const ok  = (m) => console.log(`  ✓ ${m}`);
 const bad = (m) => { console.log(`  ✗ ${m}`); ng++; };
 
+async function get(url) {
+  try {
+    const r = await fetch(url, { headers: { 'cache-control': 'no-cache' } });
+    return { ok: r.ok, status: r.status, text: r.ok ? await r.text() : '' };
+  } catch (e) { return { ok: false, status: 0, text: '', error: e.message }; }
+}
+
 async function head(url, redirect = 'manual') {
   try { return await fetch(url, { redirect, headers: { 'cache-control': 'no-cache' } }); }
   catch (e) { return { ok: false, status: 0, error: e.message, headers: new Headers() }; }
@@ -37,9 +44,9 @@ console.log(`確認対象: ${base}\n`);
 console.log('■ ページの応答');
 const html = {};
 for (const p of PAGES) {
-  const r = await fetch(`${base}/${p}`, { headers: { 'cache-control': 'no-cache' } }).catch(e => ({ ok: false, status: 0 }));
-  if (r.ok) { html[p] = await r.text(); ok(`${p} (${r.status})`); }
-  else bad(`${p} が開けない (${r.status})`);
+  const r = await get(`${base}/${p}`);
+  if (r.ok) { html[p] = r.text; ok(`${p} (${r.status})`); }
+  else bad(`${p} が開けない (${r.status}${r.error ? ' ' + r.error : ''})`);
 }
 
 /* 2. HTTPS と転送 */
@@ -72,9 +79,9 @@ for (const [p, t] of Object.entries(html)) {
 if (!stale && domain) ok('全ページで旧URLの残りなし');
 
 for (const f of ['robots.txt', 'sitemap.xml']) {
-  const r = await fetch(`${base}/${f}`, { headers: { 'cache-control': 'no-cache' } }).catch(() => ({ ok: false }));
-  if (!r.ok) { bad(`${f} が開けない`); continue; }
-  const t = await r.text();
+  const r = await get(`${base}/${f}`);
+  if (!r.ok) { bad(`${f} が開けない (${r.status})`); continue; }
+  const t = r.text;
   if (domain && t.includes(OLD_BASE)) bad(`${f} に旧URLが残っている`);
   else ok(`${f} 正常`);
 }
@@ -100,7 +107,7 @@ if (!ratioNg) ok('掲載画像はすべて16:9');
 
 /* 5. 問い合わせ先 */
 console.log('\n■ お問い合わせ');
-const js = await (await fetch(`${base}/js/main.js`, { headers: { 'cache-control': 'no-cache' } })).text().catch(() => '');
+const js = (await get(`${base}/js/main.js`)).text;
 const mail = (js.match(/CONTACT_EMAIL:\s*'([^']+)'/) || [])[1];
 if (mail === 'hashimura@dolphin.ocn.ne.jp') ok(`送信先 ${mail}`);
 else bad(`送信先が ${mail}`);
