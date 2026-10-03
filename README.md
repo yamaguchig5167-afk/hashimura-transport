@@ -10,7 +10,7 @@
 >
 > サイト上に旧社名を出さない。新規ページ作成時も同様。
 
-- 公開URL: https://yamaguchig5167-afk.github.io/hashimura-transport/
+- 公開URL: https://hashimura-unso.com/
 - 制作・保守: ソルエイト株式会社
 
 ---

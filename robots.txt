@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yamaguchig5167-afk.github.io/hashimura-transport/sitemap.xml
+Sitemap: https://hashimura-unso.com/sitemap.xml

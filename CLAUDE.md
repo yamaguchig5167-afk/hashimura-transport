@@ -5,7 +5,7 @@
 有限会社橋村運送の公式ホームページ。
 電柱輸送・電力インフラ資材輸送に特化した熊本の運送会社。
 
-**公開URL**: https://yamaguchig5167-afk.github.io/hashimura-transport/
+**公開URL**: https://hashimura-unso.com/
 **制作担当**: ソルエイト株式会社
 
 ---
