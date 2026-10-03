@@ -155,7 +155,8 @@ function initContactForm() {
       email:        form.querySelector('#email').value.trim(),
       inquiryType:  form.querySelector('#inquiry-type').value,
       message:      form.querySelector('#message').value.trim(),
-      timestamp:    new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }),
+      // 人には見えない欄。機械的な送信だけがここを埋める
+      website:      (form.querySelector('#website') || {}).value || '',
     };
 
     // バリデーション
@@ -182,25 +183,37 @@ function initContactForm() {
           'まで直接ご連絡ください。</small>'
         );
       } else {
-        // 本番：GASへPOST送信
-        await fetch(CONFIG.GAS_ENDPOINT, {
-          method: 'POST',
-          mode:   'no-cors', // GASのCORS制約のため
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // no-corsで許可される型のみ
-          body: JSON.stringify(formData),
+        // 本番：GASへPOST送信。
+        // Content-Type を text/plain にすると事前確認の通信が発生せず、
+        // 応答もそのまま読める。「届いた」と答えが返ったときだけ成功を出す。
+        const res  = await fetch(CONFIG.GAS_ENDPOINT, {
+          method:  'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body:    JSON.stringify(formData),
         });
+        const result = await res.json();
 
-        // no-corsのため応答確認はできないが、通信エラーがなければ受付扱い
-        showStatus(statusBox, 'success',
-          '✓ お問い合わせを受け付けました。<br>2営業日以内にご連絡いたします。'
-        );
-        form.reset();
+        if (res.ok && result && result.status === 'success') {
+          showStatus(statusBox, 'success',
+            '✓ お問い合わせを受け付けました。<br>2営業日以内にご連絡いたします。'
+          );
+          form.reset();
+        } else {
+          // サーバーが受け取れなかったときは、受付けたことにせずメール送信に切り替える
+          throw new Error((result && result.message) || '受付に失敗しました');
+        }
       }
     } catch (err) {
       console.error('フォーム送信エラー:', err);
-      showStatus(statusBox, 'error',
-        '送信に失敗しました。お手数ですが、お電話またはメールにてご連絡ください。<br>' +
-        '<strong>' + CONFIG.CONTACT_TEL + '</strong>'
+      // 入力内容を失わせないよう、メールソフトでの送信に切り替える
+      openMailFallback(formData);
+      showStatus(statusBox, 'info',
+        '送信できなかったため、メールソフトを起動しました。<br>' +
+        'そのまま送信ボタンを押してください。<br>' +
+        '<small>メールソフトが開かない場合は、お電話（<a href="tel:0963550361"><strong>' +
+        CONFIG.CONTACT_TEL + '</strong></a>）または ' +
+        '<a href="mailto:' + CONFIG.CONTACT_EMAIL + '">' + CONFIG.CONTACT_EMAIL + '</a> ' +
+        'まで直接ご連絡ください。</small>'
       );
     } finally {
       btn.disabled    = false;

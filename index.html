@@ -940,6 +940,12 @@
                       placeholder="輸送先・資材の種類・数量・ご希望の納期等をご記載いただけると、よりスムーズにご対応できます。"
                       required></textarea>
           </div>
+          <!-- 迷惑送信よけ。人には見えず、読み上げ・キーボード操作の対象からも外している。
+               機械的な自動入力だけがここを埋めるため、埋まっていた送信は受け付けない -->
+          <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+            <label for="website">ご記入不要</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <!-- ステータス表示エリア -->
           <div class="form-status" role="alert" aria-live="polite"></div>
           <button type="submit" class="btn btn--blue btn--full btn-submit">送信する</button>
