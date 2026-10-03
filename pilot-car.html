@@ -43,7 +43,8 @@
     linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(22,33,62,0.84) 50%, rgba(15,52,96,0.74) 100%),
     url('images/pilot-car.jpg');
   background-size: cover;
-  background-position: center 60%;
+  /* 写真を16:9に切り直して下の砂利を落としたので、車両が入る位置に合わせる */
+  background-position: center 55%;
   padding: calc(var(--header-height) + 64px) 24px 80px;
   text-align: center;
   position: relative;
@@ -456,7 +457,7 @@
         </ul>
       </div>
       <figure class="service-photo">
-        <img src="images/pilot-car.jpg" srcset="images/pilot-car-sm.jpg 480w, images/pilot-car-md.jpg 720w, images/pilot-car.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="1280" height="900" loading="lazy"
+        <img src="images/pilot-car.jpg" srcset="images/pilot-car-sm.jpg 480w, images/pilot-car-md.jpg 720w, images/pilot-car.jpg 900w" sizes="(max-width: 600px) 88vw, (max-width: 900px) 60vw, 560px" width="900" height="506" loading="lazy"
              alt="電柱を積載したトラックの隣に待機する先導車。橋村運送の先導車事業部の車両">
         <figcaption class="service-photo__caption">
           電柱を積載した輸送車の前方を走る先導車。<br>

@@ -1951,6 +1951,9 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-light);
 }
 .fleet-photo__caption {
   padding: 14px 18px 16px;
@@ -2014,7 +2017,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover;
   background: var(--bg-light);
 }
 .gallery__caption {
