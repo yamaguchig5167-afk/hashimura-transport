@@ -27,10 +27,18 @@ jobs:
       - name: GitHub Pages セットアップ
         uses: actions/configure-pages@v4
 
+      # 公開するのはサイトのファイルだけ。CLAUDE.md・README・gas・scripts・.claude は配信しない
+      - name: 公開用ファイルだけを集める
+        run: |
+          mkdir _site
+          cp *.html favicon.ico CNAME robots.txt sitemap.xml _site/
+          cp -r css js images _site/
+          find _site -name '*.md' -delete
+
       - name: ファイルアップロード
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: デプロイ
         id: deployment
